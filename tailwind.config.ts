@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const plugin = require("tailwindcss/plugin");
 
 export default {
 	darkMode: ["class"],
@@ -9,6 +10,10 @@ export default {
 	],
 	theme: {
 		extend: {
+			backgroundImage: {
+				rainbow:
+					"linear-gradient(90deg, #A9FF84 0%, #7FFFE1 33%, #F98CFF 66%, #FFEB89 100%)",
+			},
 			colors: {
 				background: "var(--background)",
 				foreground: "var(--foreground)",
@@ -31,5 +36,14 @@ export default {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		plugin(function ({ addBase, theme }: any) {
+			addBase({
+				h1: { fontSize: theme("fontSize.2xl") },
+				h2: { fontSize: theme("fontSize.xl") },
+				h3: { fontSize: theme("fontSize.lg") },
+			});
+		}),
+	],
 } satisfies Config;
