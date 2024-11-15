@@ -18,7 +18,7 @@ clean  :; forge clean
 # Remove modules
 remove :; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules && git add . && git commit -m "modules"
 
-install :; forge install cyfrin/foundry-devops --no-commit && forge install foundry-rs/forge-std --no-commit && forge install transmissions11/solmate --no-commit 
+install :; forge install cyfrin/foundry-devops --no-commit && forge install foundry-rs/forge-std --no-commit && forge install transmissions11/solmate --no-commit && forge install openzeppelin/openzeppelin-contracts --no-commit && npm i
 
 # Update Dependencies
 update:; forge update
@@ -58,7 +58,7 @@ ifeq ($(findstring --network zkevmTestnet,$(ARGS)),--network zkevmTestnet)
 endif
 
 ifeq ($(findstring --network baseSepolia,$(ARGS)),--network baseSepolia)
-	NETWORK_ARGS := --rpc-url $(BASE_SEPOLIA_RPC_URL) --private-key $(PRIVATE_KEY) 
+	NETWORK_ARGS := --rpc-url $(BASE_SEPOLIA_RPC_URL) --private-key $(PRIVATE_KEY) --broadcast --verify --verifier blockscout --verifier-url https://base-sepolia.blockscout.com/api?
 endif
 
 ifeq ($(findstring --network linea,$(ARGS)),--network linea)
@@ -87,53 +87,11 @@ endif
 
 # Commands for Local
 
-deployBasicUSDC: 
-	@forge script script/DeployBasicUSDC.s.sol:DeployBasicUSDC $(NETWORK_ARGS)
+deployDataValidatorHook: 
+	@forge script script/DeployDataValidatorHook.s.sol:DeployDataValidatorHook $(NETWORK_ARGS)
 
-deployDAB:
-	@forge script script/DeployDAB.s.sol:DeployDAB $(NETWORK_ARGS)
+deployDataAttester: 
+	@forge script script/DeployDataAttester.s.sol:DeployDataAttester $(NETWORK_ARGS)
 
-mintUSDCToAddress:
-	@forge script script/interactions/BasicUSDC_i.s.sol:MintUSDC $(NETWORK_ARGS)
-
-playSlot:
-	@forge script script/interactions/Flow_DAB_i.s.sol:PlaySlot $(NETWORK_ARGS)
-
-deployNFT:
-	@forge script script/DeployNFT.s.sol:DeployNFT $(NETWORK_ARGS)
-
-checkAllProjects:
-	@forge script script/interactions/Flow_DAB_i.s.sol:CheckAllProjects $(NETWORK_ARGS)
-
-approveUSDCToTreasury:
-	@forge script script/interactions/BasicUSDC_i.s.sol:ApproveUSDCToTreasury $(NETWORK_ARGS)
-
-deployUtils:
-	@forge script script/DeployUtils.s.sol:DeployUtils $(NETWORK_ARGS)
-
-setUpUtils:
-	@forge script script/interactions/Utils_i.s.sol:SetUpUtils $(NETWORK_ARGS)
-
-deployTreasuryCrossChain: 
-	@forge script script/DeployTreasuryCrossChain.s.sol:DeployTreasuryCrossChain $(NETWORK_ARGS)
-
-setTreasuryCrossChainAddressOnUtils:
-	@forge script script/interactions/Utils_i.s.sol:SetTreasuryCrossChainAddress $(NETWORK_ARGS)
-
-deployMainContract:
-	@forge script script/DeployMainContract.s.sol:DeployMainContract $(NETWORK_ARGS)
-
-sendFundsOnSameChain:
-	@forge script script/interactions/MainContract_i.s.sol:SendFundsOnSameChain $(NETWORK_ARGS)
-
-sendFundsOn_2Chains:
-	@forge script script/interactions/MainContract_i.s.sol:SendFundsOn_2Chains $(NETWORK_ARGS)
-
-sendFundsOn_3Chains:
-	@forge script script/interactions/MainContract_i.s.sol:SendFundsOn_3Chains $(NETWORK_ARGS) -vvvvv
-
-setTreasuryCrossChainAddressOnMainContract:
-	@forge script script/interactions/MainContract_i.s.sol:SetTreasuryCrossChainAddress $(NETWORK_ARGS)
-
-setUtilsOnTreasuryCrossChain:
-	@forge script script/interactions/TreasuryCrossChain_i.s.sol:SetUtils $(NETWORK_ARGS)
+setSchemaId: 
+	@forge script script/interactions/i_DataAttester.s.sol:SetSchemaId $(NETWORK_ARGS)

@@ -41,4 +41,16 @@ contract HelperConfig is Script {
     function getPythEntropy(uint256 chainId_) public view returns (address) {
         return pythEntropys[chainId_];
     }
+
+    function getDataValidatorHook(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("DataValidatorHook", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getDataAttester(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("DataAttester", chainId_);
+
+        return dataValidatorHook;
+    }
 }
