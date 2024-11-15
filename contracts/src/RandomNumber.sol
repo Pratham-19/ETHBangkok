@@ -5,9 +5,13 @@ import {IEntropy} from "@pythnetwork/entropy-sdk-solidity/IEntropy.sol";
 import {IEntropyConsumer} from "@pythnetwork/entropy-sdk-solidity/IEntropyConsumer.sol";
 
 contract RandomNumber {
-    address public constant ENTROPY_ADDRESS = 0x41c9e39574F40Ad34c79f1C99B66A45eFB830d4c;
+    address public immutable i_entropy;
 
-    IEntropy entropy = IEntropy(ENTROPY_ADDRESS);
+    IEntropy entropy = IEntropy(i_entropy);
+
+    constructor(address entropy_) {
+        i_entropy = entropy_;
+    }
 
     function getEntropy() internal view returns (address) {
         return address(entropy);
