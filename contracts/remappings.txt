@@ -3,3 +3,4 @@ forge-std/=lib/forge-std/src/
 foundry-devops/=lib/foundry-devops/
 solmate/=lib/solmate/src/
 @pythnetwork/pyth-sdk-solidity/=node_modules/@pythnetwork/pyth-sdk-solidity
+@pythnetwork/entropy-sdk-solidity/=node_modules/@pythnetwork/entropy-sdk-solidity/
