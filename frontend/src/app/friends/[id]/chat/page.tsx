@@ -27,6 +27,7 @@ export default function page() {
 					time="0h"
 					userName="UserName"
 					summay="Last message summary here"
+					id=""
 				/>
 				<div>
 					<ChatComponent />

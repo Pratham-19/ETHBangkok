@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FunctionComponent } from "react";
 
 export type ChatStripType = {
@@ -5,6 +6,7 @@ export type ChatStripType = {
   time?: string;
   userName?: string;
   summay?: string;
+  id: string;
 };
 
 const ChatStrip: FunctionComponent<ChatStripType> = ({
@@ -12,9 +14,11 @@ const ChatStrip: FunctionComponent<ChatStripType> = ({
   time = "0h",
   userName = "UserName",
   summay = "Last message summary here",
+  id=""
 }) => {
   return (
-    <div
+    <Link
+      href={`/friends/${id}/chat`}
       className={`self-stretch rounded-lg bg-purple-600 overflow-hidden shrink-0 flex flex-row items-center justify-start p-[0.75rem] gap-[0.625rem] text-left text-[1.5rem] text-primary font-h3 ${className}`}
     >
       <img
@@ -45,7 +49,7 @@ const ChatStrip: FunctionComponent<ChatStripType> = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
