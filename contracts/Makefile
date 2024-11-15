@@ -95,3 +95,9 @@ deployDataAttester:
 
 setSchemaId: 
 	@forge script script/interactions/i_DataAttester.s.sol:SetSchemaId $(NETWORK_ARGS)
+
+setSPInstance: 
+	@forge script script/interactions/i_DataAttester.s.sol:SetSPInstance $(NETWORK_ARGS)
+
+testAttest:
+	@forge script script/interactions/i_DataAttester.s.sol:TestAttest $(NETWORK_ARGS)

@@ -13,8 +13,8 @@ contract DataValidator is Ownable {
 
     constructor() Ownable(_msgSender()) {}
 
-    function _emitEvent(address user, uint256 questId, string memory location) internal view {
-        _emitEvent(user, questId, location);
+    function _emitEvent(address user, uint256 questId, string memory location) internal {
+        emit DataValidator__Variables(user, questId, location);
     }
 }
 

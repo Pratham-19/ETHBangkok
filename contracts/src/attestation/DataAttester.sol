@@ -20,7 +20,11 @@ contract DataAttester is Ownable {
         schemaId = schemaId_;
     }
 
-    function attest(address recipient, uint256 someNumber) external onlyOwner returns (uint64) {
+    function attest(address recipient, address user, uint256 questId, string calldata location)
+        external
+        onlyOwner
+        returns (uint64)
+    {
         bytes[] memory recipients = new bytes[](1);
         recipients[0] = abi.encode(recipient);
         Attestation memory a = Attestation({
@@ -33,7 +37,7 @@ contract DataAttester is Ownable {
             dataLocation: DataLocation.ONCHAIN,
             revoked: false,
             recipients: recipients,
-            data: abi.encode(someNumber)
+            data: abi.encode(user, questId, location)
         });
         return spInstance.attest(a, "", "", "");
     }

@@ -16,6 +16,7 @@ contract HelperConfig is Script {
 
     mapping(uint256 chainId => ChronicleDetails details) chronicleDetails;
     mapping(uint256 chainId => address) pythEntropys;
+    mapping(uint256 chainId => address) spInstnaces;
 
     constructor() {
         if (block.chainid == CHAIN_ID_BASE_SEPOLIA) {
@@ -24,6 +25,7 @@ contract HelperConfig is Script {
                 selfKisser: 0x70E58b7A1c884fFFE7dbce5249337603a28b8422
             });
             pythEntropys[CHAIN_ID_BASE_SEPOLIA] = 0x41c9e39574F40Ad34c79f1C99B66A45eFB830d4c;
+            spInstnaces[CHAIN_ID_BASE_SEPOLIA] = 0x4e4af2a21ebf62850fD99Eb6253E1eFBb56098cD;
         } else if (block.chainid == CHAIN_ID_SEPOLIA) {
             chronicleDetails[CHAIN_ID_BASE_SEPOLIA] = ChronicleDetails({
                 chronicle: 0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603,
@@ -31,6 +33,7 @@ contract HelperConfig is Script {
             });
             // TODO: Change Chain ID because Pyth don't exist on sepolia
             pythEntropys[CHAIN_ID_SEPOLIA] = 0x41c9e39574F40Ad34c79f1C99B66A45eFB830d4c;
+            spInstnaces[CHAIN_ID_SEPOLIA] = 0x878c92FD89d8E0B93Dc0a3c907A2adc7577e39c5;
         }
     }
 
@@ -40,6 +43,10 @@ contract HelperConfig is Script {
 
     function getPythEntropy(uint256 chainId_) public view returns (address) {
         return pythEntropys[chainId_];
+    }
+
+    function getSPInstance(uint256 chainId_) public view returns (address) {
+        return spInstnaces[chainId_];
     }
 
     function getDataValidatorHook(uint256 chainId_) public view returns (address) {
