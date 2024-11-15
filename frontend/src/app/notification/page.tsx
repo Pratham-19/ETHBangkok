@@ -56,20 +56,21 @@ const page = () => {
 
 			{/* Scrollable Notifications Section */}
 			<section className="flex-1 overflow-y-auto space-y-4">
-                {/* {notification.map((item, index) => ( */}
-                <NotificationComponent
-				title="TokenName"
-				category="meme"
-				time="0h"
-				cta="Share"
-				description="our most recent post"
-				tokens={true}
-				tokenAmount="1000"
-				tickerOne="$TKN1"
-				map={true}
-				distance="1500"
-			/>
-                {/* ))} */}
+				{/* {notification.map((item, index) => ( */}
+				<NotificationComponent
+					title="TokenName"
+					category="meme"
+					time="0h"
+					cta="Share"
+					description="our most recent post"
+					tokens={true}
+					tokenAmount="1000"
+					tickerOne="$TKN1"
+					map={true}
+					distance="1500"
+					link="uniswap"
+				/>
+				{/* ))} */}
 			</section>
 
 			{/* Shadcn Dialog */}
