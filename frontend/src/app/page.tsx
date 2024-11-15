@@ -17,7 +17,7 @@ export default function Home() {
 	}, []);
 	return (
 		<>
-			<div className="w-full relative overflow-hidden flex flex-col items-start justify-end pt-[39.25rem] px-[0.5rem] pb-[0.5rem] box-border gap-[1rem] bg-[url('/public/main@3x.png')] bg-cover bg-no-repeat bg-[top] leading-[normal] tracking-[normal]">
+			<div className="w-full relative overflow-hidden flex flex-col items-start justify-end pt-[39.25rem] px-[0.5rem] pb-[0.5rem] box-border gap-[1rem] bg-[url('/main@3x.png')] bg-cover bg-no-repeat bg-[top] leading-[normal] tracking-[normal]">
 				<NotificationTop
 					property1="Default"
 					category="meme"
