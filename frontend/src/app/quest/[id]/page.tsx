@@ -74,7 +74,7 @@ const Quest: FunctionComponent = () => {
 				menuHeight="unset"
 				menuGap="0.5rem"
 				menuWidth="unset"
-				to="/main"
+				to="/"
 				iconWidth="2.625rem"
 				iconHeight="2.625rem"
 				menuButtonsPadding="0.5rem"
