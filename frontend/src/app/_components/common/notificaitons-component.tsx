@@ -1,4 +1,6 @@
+"use cient";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface NotificationComponentProps {
@@ -8,6 +10,7 @@ interface NotificationComponentProps {
 	category: string;
 	time: string;
 	cta: string;
+	link: string;
 	description: string;
 	showChips?: boolean;
 	pool?: boolean;
@@ -29,6 +32,7 @@ const NotificationComponent: React.FC<NotificationComponentProps> = ({
 	category,
 	time,
 	cta,
+	link,
 	description,
 	showChips = false,
 	pool = false,
@@ -43,7 +47,8 @@ const NotificationComponent: React.FC<NotificationComponentProps> = ({
 	distance = "1500",
 }) => {
 	return (
-		<div
+		<Link
+			href={`/quest/${link}`}
 			className={`w-full max-w-md rounded-lg bg-purple-600 overflow-hidden flex flex-row items-center p-4 mb-4 gap-4 text-white cursor-pointer ${className}`}
 		>
 			{/* Icon */}
@@ -154,7 +159,7 @@ const NotificationComponent: React.FC<NotificationComponentProps> = ({
 					)}
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
