@@ -27,7 +27,7 @@ export default function page() {
 					time="0h"
 					userName="UserName"
 					id=""
-                    summaryEnabled={false}
+					summaryEnabled={false}
 				/>
 				<div>
 					<ChatComponent />

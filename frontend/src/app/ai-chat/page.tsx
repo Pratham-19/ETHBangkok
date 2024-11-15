@@ -28,7 +28,7 @@ export default function page() {
 					time="0h"
 					userName="Game assistant"
 					id=""
-                    summaryEnabled={false}
+					summaryEnabled={false}
 				/>
 				<RainbowBorderComponent>
 					<ChatComponent />
