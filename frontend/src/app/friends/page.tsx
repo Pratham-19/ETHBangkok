@@ -32,18 +32,21 @@ const Friends: FunctionComponent = () => {
 							userName="UserName"
 							summay="Last message summary here"
 							id=""
+							summaryEnabled={true}
 						/>
 						<ChatStrip
 							time="0h"
 							userName="UserName"
 							summay="Last message summary here"
 							id=""
+							summaryEnabled={true}
 						/>
 						<ChatStrip
 							time="0h"
 							userName="UserName"
 							summay="Last message summary here"
 							id=""
+							summaryEnabled={true}
 						/>
 					</div>
 				</div>

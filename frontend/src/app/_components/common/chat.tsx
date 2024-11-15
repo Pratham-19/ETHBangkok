@@ -71,11 +71,11 @@ const ChatComponent = () => {
 							className={`max-w-[75%] p-3 rounded-lg bg-purple-800 ${
 								msg.role === "user"
 									? "ml-auto  text-left border-r-2 rounded-r-none border-highlight"
-									: "mr-auto text-right border-l-2 rounded-l-none border-primary"
+									: "mr-auto border-l-2 rounded-l-none border-primary"
 							}`}
 						>
 							<p className="text-sm">{msg.text}</p>
-							<span className="text-xs text-purple-400 text-right">
+							<span className="text-xs text-purple-400 ml-auto">
 								{msg.time}
 							</span>
 						</div>
@@ -97,7 +97,7 @@ const ChatComponent = () => {
 					onClick={handleSendMessage}
 					className="bg-primary size-10 rounded-full"
 				>
-					<MousePointer2Icon fill="#ffc9f3" className="text-purple-400"/>
+					<MousePointer2Icon fill="#ffc9f3" className="text-highlight rotate-90"/>
 				</Button>
 			</div>
 		</div>
