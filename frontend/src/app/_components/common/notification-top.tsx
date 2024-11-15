@@ -279,7 +279,7 @@ const NotificationTop: FunctionComponent<NotificationTopType> = ({
 	return (
 		showNotification && (
 			<Link
-				className={`w-full !m-[0] absolute top-[0.5rem] left-[calc(50%_-_188.5px)] rounded-lg bg-purple-600 overflow-hidden flex flex-row items-center justify-start p-2 box-border gap-[0.5rem] cursor-pointer z-[2] text-left text-[1rem] text-primary font-h3 ${className}`}
+				className={`w-[23.563rem] !m-[0] absolute top-[0.5rem] left-[calc(50%_-_188.5px)] rounded-lg bg-purple-600 overflow-hidden flex flex-row items-center justify-start p-[0.5rem] box-border gap-[0.5rem] cursor-pointer z-[2] text-left text-[1rem] text-primary font-h3 ${className}`}
 				href={to}
 				data-property1={property1}
 				style={notificationStyle}

@@ -1,3 +1,4 @@
+"use client";
 import {
 	FunctionComponent,
 	useMemo,
@@ -28,8 +29,7 @@ export type MenuType = {
 	tablerIconUserCircleHeight?: CSSProperties["height"];
 	tablerIconUserCircleWidth?: CSSProperties["width"];
 
-	/** Action props */
-	onIconClick?: () => void;
+	to: string;
 };
 
 const Menu: FunctionComponent<MenuType> = ({
@@ -40,7 +40,7 @@ const Menu: FunctionComponent<MenuType> = ({
 	menuHeight,
 	menuGap,
 	menuWidth,
-	onIconClick,
+	to,
 	iconWidth,
 	iconHeight,
 	menuButtonsPadding,
@@ -94,13 +94,14 @@ const Menu: FunctionComponent<MenuType> = ({
 			style={menuStyle}
 		>
 			{back && (
-				<img
-					className="w-[2.625rem] rounded-81xl h-[2.625rem] overflow-hidden shrink-0 object-contain"
-					alt=""
-					src="/icon@2x.png"
-					onClick={onIconClick}
-					style={iconStyle}
-				/>
+				<Link href={to}>
+					<img
+						className="w-[2.625rem] rounded-81xl h-[2.625rem] overflow-hidden shrink-0 object-contain"
+						alt=""
+						src="/icon@2x.png"
+						style={iconStyle}
+					/>
+				</Link>
 			)}
 			<div
 				className="flex-1 rounded-81xl bg-purple-400 flex flex-row items-center justify-between p-[0.5rem]"
