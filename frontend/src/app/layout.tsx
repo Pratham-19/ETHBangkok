@@ -17,15 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NextAuthProvider>
-        <ErudaProvider>
-          <MiniKitProvider>
-            <body className={`antialiased`}>
+      <body className={`antialiased`}>
+        <NextAuthProvider>
+          <ErudaProvider>
+            <MiniKitProvider>
               <DynamicProvider>{children}</DynamicProvider>
-            </body>
-          </MiniKitProvider>
-        </ErudaProvider>
-      </NextAuthProvider>
+            </MiniKitProvider>
+          </ErudaProvider>
+        </NextAuthProvider>
+      </body>
     </html>
   );
 }
