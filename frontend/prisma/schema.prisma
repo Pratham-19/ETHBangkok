@@ -1,0 +1,216 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// User Profile and Authentication
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Profile Information
+  username        String  @unique
+  walletAddress   String  @unique
+  profileImage    String?
+  description     String?
+  team            String? // Team name like "Amber", "Ruby" etc.
+  distanceWalked  Float   @default(0)
+  lastKnownLat    Float?
+  lastKnownLong   Float?
+  isOnline        Boolean @default(false)
+
+  // Relations
+  collectedTokens     UserToken[]    // Tokens collected by user
+  friends             Friendship[]    // User's friends
+  sentFriendRequests  FriendRequest[] @relation("Sender")
+  receivedRequests    FriendRequest[] @relation("Receiver")
+  participatedQuests  UserQuest[]     // Quests user participated in
+  messages            Message[]       // Messages sent by user
+  purchasedCrates     UserCrate[]     // Crates purchased by user
+  ownedNFTs           UserNFT[]       // NFTs owned by user
+}
+
+// Tokens that can be collected in the game
+model Token {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  symbol      String   @unique
+  name        String
+  description String
+  tokenType   String   // e.g., "ERC20", "ERC721"
+  chainId     Int
+  contractAddress String
+  logoUrl     String
+  rarity      String   // e.g., "common", "rare", "legendary"
+  spawnRate   Float    // Probability of spawning
+  latitude    Float?   // Current spawn location
+  longitude   Float?   // Current spawn location
+
+  // Relations
+  collectors  UserToken[]    // Users who collected this token
+  crates      CrateToken[]   // Crates containing this token
+}
+
+// User's collected tokens
+model UserToken {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  tokenId   String   @db.ObjectId
+  amount    Float    // Amount of tokens collected
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+  token     Token    @relation(fields: [tokenId], references: [id])
+
+  @@unique([userId, tokenId])
+}
+
+// Quests/Missions in the game
+model Quest {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  name        String
+  description String
+  tokenReward String   // Token symbol given as reward
+  rewardAmount Float
+  requiredDistance Float? // Distance to walk if required
+  maxParticipants Int?
+  startDate   DateTime
+  endDate     DateTime
+  status      String   // "active", "completed", "expired"
+  questType   String   // "walk", "collect", "trade"
+  difficulty  String   // "easy", "medium", "hard"
+
+  // Relations
+  participants UserQuest[]
+}
+
+// User's quest progress
+model UserQuest {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  questId   String   @db.ObjectId
+  progress  Float    @default(0)
+  status    String   // "in_progress", "completed", "failed"
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+  quest     Quest    @relation(fields: [questId], references: [id])
+
+  @@unique([userId, questId])
+}
+
+// Friendship system
+model Friendship {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  friendId  String   @db.ObjectId
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, friendId])
+}
+
+// Friend Requests
+model FriendRequest {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  senderId  String   @db.ObjectId
+  receiverId String  @db.ObjectId
+  status    String   // "pending", "accepted", "rejected"
+  
+  // Relations
+  sender    User     @relation("Sender", fields: [senderId], references: [id])
+  receiver  User     @relation("Receiver", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+}
+
+// Chat Messages
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  senderId  String   @db.ObjectId
+  receiverId String  @db.ObjectId
+  content   String
+  isRead    Boolean  @default(false)
+  
+  // Relations
+  sender    User     @relation(fields: [senderId], references: [id])
+
+  @@index([senderId, receiverId])
+}
+
+// Marketplace Crates
+model Crate {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  name        String
+  description String
+  price       Float
+  currency    String   // Payment currency
+  rarity      String
+  imageUrl    String
+  maxSupply   Int?
+  available   Int      @default(0)
+
+  // Relations
+  tokens      CrateToken[]  // Tokens inside the crate
+  purchases   UserCrate[]   // Users who purchased this crate
+}
+
+// Tokens in Crates
+model CrateToken {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  crateId   String   @db.ObjectId
+  tokenId   String   @db.ObjectId
+  dropRate  Float    // Probability of getting this token
+  
+  // Relations
+  crate     Crate    @relation(fields: [crateId], references: [id])
+  token     Token    @relation(fields: [tokenId], references: [id])
+
+  @@unique([crateId, tokenId])
+}
+
+// User's purchased crates
+model UserCrate {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  crateId   String   @db.ObjectId
+  opened    Boolean  @default(false)
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+  crate     Crate    @relation(fields: [crateId], references: [id])
+}
+
+// NFTs (can be used for special items or achievements)
+model UserNFT {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  tokenId   String   // NFT token ID
+  contractAddress String
+  chainId   Int
+  metadata  Json?    // NFT metadata
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+}

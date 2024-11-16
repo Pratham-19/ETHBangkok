@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import DynamicProvider from "@/wrappers/dynamic-provider";
 
 const font = localFont({
 	src: "./fonts/HostGrotesk-Regular.otf",
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${font.variable} antialiased`}>{children}</body>
+			<body className={`${font.variable} antialiased`}>
+				<DynamicProvider>{children}</DynamicProvider>
+			</body>
 		</html>
 	);
 }
