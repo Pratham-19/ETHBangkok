@@ -117,7 +117,7 @@ const Menu: FunctionComponent<MenuType> = ({
 				/>
 				<Icon
 					property1="def"
-					to="/createquest"
+					to="/ai-chat"
 					iconPadding="0.5rem"
 					tablerIconArrowBigRight="/tablericonmessages-3.svg"
 					tablerIconArrowBigRightHeight="1.5rem"
@@ -141,7 +141,7 @@ const Menu: FunctionComponent<MenuType> = ({
 				/>
 				<Icon
 					property1="def"
-					to="/createquest1"
+					to="/marketplace"
 					iconPadding="0.5rem"
 					tablerIconArrowBigRight="/tablericontagstarred.svg"
 					tablerIconArrowBigRightHeight="1.5rem"
