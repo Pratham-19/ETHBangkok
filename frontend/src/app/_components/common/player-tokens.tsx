@@ -20,9 +20,21 @@ const PlayerTokens: FunctionComponent<PlayerTokensType> = ({
       </div>
       <TableRowToken
         ticker="TKN"
-        tokenName="TokenName"
-        price="0000"
-        tokenAmount="0000"
+        tokenName="FEPE"
+        price="100"
+        tokenAmount="200"
+      />
+      <TableRowToken
+        ticker="PKN"
+        tokenName="TEPE"
+        price="0.005"
+        tokenAmount="1000"
+      />
+      <TableRowToken
+        ticker="KKN"
+        tokenName="PEPE"
+        price="1005"
+        tokenAmount="10"
       />
       <div className="self-stretch bg-purple-400 flex flex-row items-center justify-end py-[0.5rem] pl-[16rem] pr-[0.5rem] gap-[0.5rem] text-[0.75rem] text-white">
         <div className="rounded-81xl bg-primary flex flex-row items-center justify-start p-[0.25rem]">

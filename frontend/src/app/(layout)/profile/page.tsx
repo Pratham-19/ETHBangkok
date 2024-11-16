@@ -14,7 +14,6 @@ const Profile: FunctionComponent = () => {
       <section className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0.375rem] pb-[2.937rem] box-border gap-[1rem] max-w-full">
         <PlayerProfile />
         <PlayerSkins />
-
         <PlayerTokens />
       </section>
     </div>

@@ -192,7 +192,7 @@ export default function CreateProfilePage() {
             </div>
             <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem]">
               <div className="relative">
-                Join 0xCity with any of the following accounts and start
+                Join token trek with any of the following accounts and start
                 exploring to earn!
               </div>
               {connectionError && (

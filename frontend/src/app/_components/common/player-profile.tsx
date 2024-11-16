@@ -1,15 +1,35 @@
-import { FunctionComponent, useState, useCallback } from "react";
+import { FunctionComponent, useState, useCallback, useEffect } from "react";
+import Image from "next/image";
 import PortalPopup from "./portal-popup";
 import ProfileModal from "./profile-modal";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 export type PlayerProfileType = {
   className?: string;
 };
 
+interface UserProfile {
+  username: string;
+  isWorldcoinVerified: boolean;
+  team?: {
+    primary: string;
+    secondary: string;
+  };
+}
+
 const PlayerProfile: FunctionComponent<PlayerProfileType> = ({
   className = "",
 }) => {
   const [isModalvrOpen, setModalvrOpen] = useState(false);
+  const [profileData, setProfileData] = useState<UserProfile | null>(null);
+  const { user, primaryWallet } = useDynamicContext();
+
+  useEffect(() => {
+    const savedProfile = localStorage.getItem("userProfile");
+    if (savedProfile) {
+      setProfileData(JSON.parse(savedProfile));
+    }
+  }, []);
 
   const openModalvr = useCallback(() => {
     setModalvrOpen(true);
@@ -22,33 +42,44 @@ const PlayerProfile: FunctionComponent<PlayerProfileType> = ({
   return (
     <>
       <div
-        className={`self-stretch rounded-lg bg-purple-600 border-rainbow border-[2px] border-solid box-border overflow-hidden flex flex-row items-center justify-start flex-wrap content-center py-[0.562rem] px-[0.625rem] gap-[0.625rem] min-h-[7rem] cursor-pointer text-left text-[2rem] text-primary   ${className}`}
+        className={`self-stretch rounded-lg bg-purple-600 border-rainbow border-[2px] border-solid overflow-hidden flex flex-row items-center justify-start py-3 px-3 gap-2 min-h-[8rem] cursor-pointer hover:bg-purple-700 transition-colors duration-200 ${className}`}
         onClick={openModalvr}
       >
-        <img
-          className="h-[5rem] w-[5rem] relative rounded-tl-2xl rounded-tr-81xl rounded-b-81xl overflow-hidden shrink-0 object-cover"
-          loading="lazy"
-          alt=""
-          src="/teams2@2x.png"
-        />
-        <div className="flex-1 flex flex-col items-start justify-center gap-[0.25rem] min-w-[9.438rem]">
-          <h1 className="m-0 self-stretch relative text-inhfont-semiboldabold  ">
-            UserName
+        <div className="relative size-28 flex-shrink-0">
+          <Image
+            src="/teams.png"
+            alt="Profile"
+            width={256}
+            height={256}
+            className="object-fill"
+            priority
+          />
+        </div>
+
+        <div className="flex-1 flex flex-col items-start justify-center gap-2 min-w-[9.438rem] overflow-hidden">
+          <h1 className="m-0 self-stretch relative text-[2rem] font-semibold text-primary truncate">
+            {profileData?.username || "Loading..."}
           </h1>
-          <div className="relative text-[0.75rem] overflow-hidden text-ellipsis whitespace-nowrap">
+
+          <div className="relative text-[1rem] text-thistle overflow-hidden text-wrap whitespace-nowrap w-full">
             Building in web3, catching all the tokens.
           </div>
-          <div className="self-stretch flex flex-row items-center justify-start py-[0rem] pl-[0rem] pr-[8.125rem] gap-[0.25rem] text-[1rem]">
-            <img
-              className="h-[1.125rem] w-[1.125rem] relative overflow-hidden shrink-0"
-              loading="lazy"
-              alt=""
+
+          <div className="flex items-center gap-2">
+            <Image
               src="/tablericonwallet.svg"
+              alt="Wallet"
+              width={20}
+              height={20}
+              className="flex-shrink-0"
             />
-            <div className="relative">$1,553.06</div>
+            <div className="text-primary text-bold text-[1.2rem]">
+              $1,553.06
+            </div>
           </div>
         </div>
       </div>
+
       {isModalvrOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
