@@ -12,6 +12,7 @@ import {
 } from "@dynamic-labs/sdk-react-core";
 import { ProviderEnum } from "@dynamic-labs/types";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface UserProfile {
   username: string;
@@ -148,7 +149,7 @@ export default function CreateProfilePage() {
         ? "Verified  World ID"
         : "VerifyWorld ID",
       icon: "/worldcoinlogo-1.svg",
-      onClick: undefined,
+      onClick: () => signIn(),
     },
     {
       text: "Connect Google",

@@ -60,16 +60,13 @@ const ChatComponent = () => {
     if (!primaryWallet?.address) {
       throw new Error("Wallet not connected");
     }
+    console.log("primaryWallet", primaryWallet);
 
-    console.log(primaryWallet.address);
-
-    const amountInWei = ethers.parseEther(extractedData.amount);
-
-    console.log("Sending", amountInWei.toString(), "to", extractedData.address);
+    console.log("Sending", extractedData, "to", extractedData.address);
 
     const tx = await open({
       recipientAddress: extractedData.address,
-      value: amountInWei,
+      value: ethers.parseEther(extractedData.amount),
     });
 
     return tx;
