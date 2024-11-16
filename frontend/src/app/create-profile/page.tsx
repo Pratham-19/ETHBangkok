@@ -1,12 +1,12 @@
 "use client";
 import React, { useCallback, useState } from "react";
-import ThemeButton from "../../_components/common/theme-button";
-import Icon from "../../_components/common/icon";
+import ThemeButton from "../_components/common/theme-button";
+import Icon from "../_components/common/icon";
 import Image from "next/image";
-import Notificationheader from "../../_components/common/notificationheader";
-import { Input } from "../../_components/ui/input";
-import ImageUploader from "../../_components/common/image-uploader";
-import FrameComponent from "../../_components/common/frame-component";
+import Notificationheader from "../_components/common/notificationheader";
+import { Input } from "../_components/ui/input";
+import ImageUploader from "../_components/common/image-uploader";
+import FrameComponent from "../_components/common/frame-component";
 
 // Define types for profile data
 interface ProfileData {
