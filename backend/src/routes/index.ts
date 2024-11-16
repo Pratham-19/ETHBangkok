@@ -1,6 +1,6 @@
 import express from 'express';
-import { healthCheck } from '../controller/health';
-import { getQuestAssets } from '../controller/quest';
+import { healthCheck } from '../handler/health';
+import { getQuestAssets } from '../handler/quest';
 
 const router = express.Router();
 
