@@ -30,7 +30,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
 							</div>
 						</div>
 						<div className="self-stretch flex flex-col items-start justify-start gap-[0.25rem] text-[1rem]">
-							<div className="flex flex-row items-start justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[0.2em]">
+							<div className="flex flex-row items-start justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[2em]">
 								<div className="flex flex-col items-start justify-start pt-[0.156rem] px-[0rem] pb-[0rem]">
 									<div className="flex flex-col justify-start gap-[0.25rem]">
 										<b className="">
@@ -42,7 +42,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
 								<div className="flex flex-col items-start justify-start pt-[0.156rem] px-[0rem] pb-[0rem]">
 									<b>Total Explored</b>
 									<div className="flex flex-col justify-start gap-[0.25rem]">
-										<span className="">0.5 km </span>
+										<span className="">0.3 km </span>
 									</div>
 								</div>
 							</div>
