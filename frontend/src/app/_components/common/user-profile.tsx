@@ -10,7 +10,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
 }) => {
   return (
     <section
-      className={`self-stretch rounded-lg bg-purple-800 border-primary border-[2px] border-solid box-border overflow-hidden flex flex-col items-start justify-start py-[0.312rem] px-[0.375rem] gap-[1rem] min-h-[10.5rem] text-left text-[1.5rem] text-primary font-h3 ${className}`}
+      className={`self-stretch rounded-lg bg-purple-800 border-primary border-[2px] border-solid box-border overflow-hidden flex flex-col items-start justify-start py-[0.312rem] px-[0.375rem] gap-[1rem] min-h-[10.5rem] text-left text-[1.5rem] text-primary   ${className}`}
     >
       <div className="self-stretch flex flex-row items-start justify-start flex-wrap content-start gap-[1rem]">
         <img
@@ -22,7 +22,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
         <div className="flex-1 flex flex-col items-start justify-start pt-[0.093rem] px-[0rem] pb-[0rem] box-border min-w-[10.75rem]">
           <div className="self-stretch flex flex-col items-start justify-start gap-[0.75rem]">
             <div className="self-stretch flex flex-row items-start justify-between gap-[1.25rem]">
-              <h1 className="m-0 relative text-inherit font-extrabold font-[inherit]">
+              <h1 className="m-0 relative text-ifont-semiboldtrabold  ">
                 UserName
               </h1>
               <div className="flex flex-col items-start justify-start pt-[0.25rem] px-[0rem] pb-[0rem] text-[0.75rem] text-mint">
@@ -54,7 +54,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
           </div>
         </div>
       </div>
-      <Menu property1="Default" back={false} />
+      <Menu property1="Default" back={false} to="/home" />
     </section>
   );
 };

@@ -12,12 +12,12 @@ const ProfileModal: FunctionComponent<ProfileModalType> = ({
 }) => {
   return (
     <div
-      className={`w-[340px] h-[480px] relative rounded-lg bg-purple-800 border-rainbow border-[4px] border-solid box-border overflow-hidden flex flex-col items-center justify-between py-[11px] px-3 leading-[normal] tracking-[normal] max-w-full max-h-full text-left text-13xl text-primary font-h3 ${className}`}
+      className={`w-[340px] h-[480px] relative rounded-lg bg-purple-800 border-rainbow border-[4px] border-solid box-border overflow-hidden flex flex-col items-center justify-between py-[11px] px-3 leading-[normal] tracking-[normal] max-w-full max-h-full text-left text-13xl text-primary   ${className}`}
     >
-      <h1 className="m-0 self-stretch relative text-inherit font-extrabold font-[inherit]">
+      <h1 className="m-0 self-stretch relative text-inherfont-semiboldold  ">
         Edit Profile
       </h1>
-      <section className="self-stretch flex flex-col items-center justify-start text-left text-5xl text-thistle font-h3">
+      <section className="self-stretch flex flex-col items-center justify-start text-left text-5xl text-thistle  ">
         <div className="w-60 h-60 rounded-481xl overflow-hidden shrink-0 flex flex-row items-center justify-center py-[55px] px-14 box-border bg-[url('/public/frame-39@3x.png')] bg-cover bg-no-repeat bg-[top]">
           <img
             className="h-[120px] w-[120px] relative overflow-hidden shrink-0"
@@ -27,7 +27,7 @@ const ProfileModal: FunctionComponent<ProfileModalType> = ({
           />
         </div>
         <div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-3 z-[1] mt-[-28px]">
-          <h3 className="m-0 relative text-inherit font-extrabold font-[inherit]">
+          <h3 className="m-0 relative text-inhfont-semiboldabold  ">
             Add User Name_
           </h3>
         </div>
