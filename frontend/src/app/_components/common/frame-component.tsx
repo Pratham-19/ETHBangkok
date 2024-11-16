@@ -52,10 +52,6 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
     }
   };
 
-  const selectedStyle = isSelected
-    ? "ring-4 ring-highlight ring-offset-2 ring-offset-purple-800"
-    : "";
-
   return (
     <div
       className={`self-stretch flex-1 flex flex-row items-start justify-start gap-[1rem] text-left text-[2rem] text-purple-800   ${className}`}
@@ -63,7 +59,7 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
       <div
         className={`self-stretch flex-1 rounded-lg overflow-hidden flex flex-col items-start justify-end 
   py-[1rem] px-[0.75rem] bg-cover bg-no-repeat bg-[top] cursor-pointer 
-  transition-all duration-200 hover:scale-[1.02] relative ${selectedStyle}`}
+  transition-all duration-200 hover:scale-[1.02] relative`}
         style={frameDivStyle}
         onClick={handleClick}
       >
@@ -77,7 +73,7 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
       <div
         className={`self-stretch flex-1 rounded-lg overflow-hidden flex flex-col items-start justify-end 
         py-[1rem] px-[0.75rem] bg-cover bg-no-repeat bg-[top] cursor-pointer 
-        transition-all duration-200 hover:scale-[1.02] relative ${selectedStyle}`}
+        transition-all duration-200 hover:scale-[1.02] relative`}
         style={rootStyle}
         onClick={handleClick}
       >
