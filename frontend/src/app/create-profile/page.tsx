@@ -7,6 +7,8 @@ import Notificationheader from "../_components/common/notificationheader";
 import { Input } from "../_components/ui/input";
 import ImageUploader from "../_components/common/image-uploader";
 import FrameComponent from "../_components/common/frame-component";
+import { useSocialAccounts } from "@dynamic-labs/sdk-react-core";
+import { ProviderEnum } from "@dynamic-labs/types";
 
 // Define types for profile data
 interface ProfileData {
@@ -24,6 +26,8 @@ interface TeamSelection {
 }
 
 export default function CreateProfilePage() {
+	const { error, isProcessing, signInWithSocialAccount } =
+		useSocialAccounts();
 	// Combined state for all profile data
 	const [profileData, setProfileData] = useState<ProfileData>({
 		username: "",
@@ -94,11 +98,19 @@ export default function CreateProfilePage() {
 								your X or world account.
 							</div>
 							<div className="self-stretch flex flex-row items-start justify-start flex-wrap content-start gap-[1rem] text-highlight">
-								<ThemeButton
-									btn="large"
-									text="Connect X"
-									tablerIconBrandX="/tablericonbrandx.svg"
-								/>
+								<div
+									onClick={() =>
+										signInWithSocialAccount(
+											ProviderEnum.Twitter
+										)
+									}
+								>
+									<ThemeButton
+										btn="large"
+										text="Connect X"
+										tablerIconBrandX="/tablericonbrandx.svg"
+									/>
+								</div>
 								<ThemeButton
 									btn="large"
 									text="World Connect"
