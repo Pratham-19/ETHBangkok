@@ -1,128 +1,167 @@
+// ChatComponent.jsx
 "use client";
-import { useState, useRef, useEffect } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { ScrollArea } from "../ui/scroll-area";
-import { MousePointer2Icon, Send } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Client } from "@xmtp/browser-sdk";
+import { Input } from "@/app/_components/ui/input";
+import { Button } from "@/app/_components/ui/button";
+import { MousePointer2Icon, Loader2, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/app/_components/ui/alert";
 
-interface Message {
-  id: number;
-  text: string;
-  role: "user" | "bot";
-  time: string;
-}
+const ChatComponent = ({ peerAddress, primaryWallet }: any) => {
+	const [messages, setMessages] = useState([]);
+	const [newMessage, setNewMessage] = useState("");
+	const [client, setClient] = useState(null);
+	const [conversation, setConversation] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [isSending, setIsSending] = useState(false);
 
-const initialMessages: Message[] = [
-  {
-    id: 1,
-    text: "Hello! How can I help you today?",
-    role: "bot",
-    time: "0h ago",
-  },
-  {
-    id: 2,
-    text: "I'm just testing the chat feature.",
-    role: "user",
-    time: "0h ago",
-  },
-];
+	// Initialize XMTP client
+	useEffect(() => {
+		const initXmtp = async () => {
+			if (!primaryWallet || !peerAddress) {
+				setIsLoading(false);
+				return;
+			}
 
-const ChatComponent = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const [newMessage, setNewMessage] = useState<string>("");
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+			try {
+				setIsLoading(true);
+				setError(null);
 
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    setTimeout(() => {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  }, [messages]);
+				// Create a signer
+				const signer = {
+					getAddress: () => primaryWallet.address,
+					signMessage: async (message) =>
+						primaryWallet.signMessage(message),
+				};
 
-  const handleSendMessage = () => {
-    if (newMessage.trim() === "") return;
+				// Create XMTP client without encryption
+				const xmtpClient = await Client.create(signer, { env: "dev" });
+				setClient(xmtpClient);
 
-    const currentTime = new Date().toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
+				// Start conversation
+				const conv = await xmtpClient.conversations.newDm(peerAddress);
+				setConversation(conv);
 
-    const userMessage: Message = {
-      id: messages.length + 1,
-      text: newMessage,
-      role: "user",
-      time: currentTime,
-    };
+				// Load existing messages
+				const msgs = await conv.messages();
+				setMessages(msgs);
 
-    setMessages([...messages, userMessage]);
-    setNewMessage("");
+				// Stream new messages
+				const stream = await conv.streamMessages();
 
-    // Simulating a bot response
-    setTimeout(() => {
-      const botMessage: Message = {
-        id: messages.length + 2,
-        text: "Thanks for reaching out! This is an automated response.",
-        role: "bot",
-        time: currentTime,
-      };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    }, 1000);
-  };
+				(async () => {
+					try {
+						for await (const message of stream) {
+							setMessages((prev) => [...prev, message]);
+						}
+					} catch (streamError) {
+						console.error("Message stream error:", streamError);
+						setError("Lost connection to chat. Please refresh.");
+					}
+				})();
+			} catch (error) {
+				console.error("XMTP initialization error:", error);
+				setError(error.message || "Failed to initialize chat");
+			} finally {
+				setIsLoading(false);
+			}
+		};
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+		initXmtp();
+	}, [primaryWallet, peerAddress]);
 
-  return (
-    <div className="flex flex-col h-[calc(100svh-17rem)] bg-purple-800">
-      {/* Chat Messages */}
-      <ScrollArea 
-        ref={scrollAreaRef}
-        className="flex-1 p-4 bg-purple-600"
-      >
-        <div className="space-y-4 min-h-full">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`max-w-[75%] p-3 rounded-lg bg-purple-800 ${
-                msg.role === "user"
-                  ? "ml-auto text-left border-r-2 rounded-r-none border-highlight"
-                  : "mr-auto border-l-2 rounded-l-none border-primary"
-              }`}
-            >
-              <p className="text-sm text-primary">{msg.text}</p>
-              <span className="text-xs text-purple-400 block text-right mt-1">
-                {msg.time}
-              </span>
-            </div>
-          ))}
-          <div ref={bottomRef} />
-        </div>
-      </ScrollArea>
+	const sendMessage = async () => {
+		if (!newMessage.trim() || !client || !conversation || isSending) return;
 
-      {/* Chat Input Area */}
-      <div className="p-4 bg-purple-800 flex items-center gap-2 border-t border-purple-600/30">
-        <Input
-          type="text"
-          placeholder="Type your message"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          onKeyDown={handleKeyPress}
-          className="flex-1 bg-purple-800 placeholder:text-primary/60 text-primary ring-0 border-none focus-visible:ring-0"
-        />
-        <Button
-          onClick={handleSendMessage}
-          className="bg-primary size-10 rounded-full hover:bg-primary/90"
-        >
-          <MousePointer2Icon fill="#ffc9f3" className="text-highlight rotate-90"/>
-        </Button>
-      </div>
-    </div>
-  );
+		try {
+			setIsSending(true);
+			await conversation.send(newMessage);
+			setNewMessage("");
+		} catch (error) {
+			console.error("Failed to send message:", error);
+			setError("Failed to send message. Please try again.");
+		} finally {
+			setIsSending(false);
+		}
+	};
+
+	if (isLoading) {
+		return (
+			<div className="flex items-center justify-center h-[calc(100svh-17rem)] bg-purple-800">
+				<Loader2 className="w-8 h-8 text-white animate-spin" />
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="h-[calc(100svh-17rem)] bg-purple-800 p-4">
+				<Alert variant="destructive">
+					<AlertCircle className="h-4 w-4" />
+					<AlertDescription>{error}</AlertDescription>
+				</Alert>
+			</div>
+		);
+	}
+
+	if (!primaryWallet) {
+		return (
+			<div className="h-[calc(100svh-17rem)] bg-purple-800 p-4">
+				<Alert>
+					<AlertDescription>
+						Please connect your wallet to chat.
+					</AlertDescription>
+				</Alert>
+			</div>
+		);
+	}
+
+	return (
+		<div className="flex flex-col h-[calc(100svh-17rem)] bg-purple-800">
+			<div className="flex-1 p-4 overflow-auto space-y-4">
+				{messages.map((msg) => (
+					<div
+						key={msg.id}
+						className={`max-w-[75%] p-3 rounded-lg ${
+							msg.senderAddress === client?.address
+								? "ml-auto bg-purple-600"
+								: "bg-purple-700"
+						}`}
+					>
+						<p className="text-white break-words">{msg.content}</p>
+						<span className="text-xs text-gray-300 mt-1 block">
+							{new Date(msg.sentAt).toLocaleTimeString()}
+						</span>
+					</div>
+				))}
+			</div>
+
+			<div className="p-4 bg-purple-400 flex gap-2">
+				<Input
+					value={newMessage}
+					onChange={(e: any) => setNewMessage(e.target.value)}
+					onKeyDown={(e: any) =>
+						e.key === "Enter" && !e.shiftKey && sendMessage()
+					}
+					placeholder="Type a message..."
+					className="flex-1 bg-purple-800 text-white"
+					disabled={isSending}
+				/>
+				<Button
+					onClick={sendMessage}
+					className="bg-primary rounded-full"
+					disabled={isSending}
+				>
+					{isSending ? (
+						<Loader2 className="w-4 h-4 animate-spin" />
+					) : (
+						<MousePointer2Icon className="rotate-90" />
+					)}
+				</Button>
+			</div>
+		</div>
+	);
 };
 
 export default ChatComponent;
