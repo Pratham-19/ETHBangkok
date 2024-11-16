@@ -23,14 +23,14 @@ export default function PlayableMap() {
 				latitude: 13.719483,
 				longitude: 100.558878,
 				name: "Alice",
-				avatarUrl: "/u1.png",
+				avatarUrl: "/ppgorilla@2x.png",
 			},
 			{
 				id: "2",
 				latitude: 13.722651,
 				longitude: 100.555686,
 				name: "Bob",
-				avatarUrl: "/u2.png",
+				avatarUrl: "/pplion@2x.png",
 			},
 		],
 		[]

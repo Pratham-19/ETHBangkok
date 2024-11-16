@@ -64,7 +64,7 @@ const Intro: FunctionComponent = () => {
 						</div> */}
 						<Icon
 							property1="def"
-							to="/"
+							to="/home"
 							iconPadding="0.5rem"
 							tablerIconArrowBigRight="/tablericonarrowbigright.svg"
 							tablerIconArrowBigRightHeight="1.5rem"

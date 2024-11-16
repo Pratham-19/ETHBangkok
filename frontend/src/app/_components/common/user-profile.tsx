@@ -54,7 +54,7 @@ const UserProfile: FunctionComponent<UserProfileType> = ({
 					</div>
 				</div>
 			</div>
-			<Menu property1="Default" back={false} to="/" />
+			<Menu property1="Default" back={false} to="/home" />
 		</section>
 	);
 };

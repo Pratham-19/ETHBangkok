@@ -52,7 +52,7 @@ const createCrateMarker = () =>
 		`<div class="crate-outer">
       <div class="crate-gradient-border">
         <div class="crate-inner">
-          <img src="/chest-pic.png" alt="crate" class="marker-image" />
+          <img src="/chestbg-1@2x.png" alt="crate" class="marker-image" />
         </div>
       </div>
     </div>`

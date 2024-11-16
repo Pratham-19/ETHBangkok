@@ -29,7 +29,7 @@ export default function RootLayout({
 			{/* Fixed Footer */}
 			<div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center px-4">
 				<div className="w-full max-w-md">
-					<Menu property1="Default" back to="/" />
+					<Menu property1="Default" back to="/home" />
 				</div>
 			</div>
 		</div>
