@@ -1,10 +1,15 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import ThemeButton from "../_components/common/theme-button";
 import Icon from "../_components/common/icon";
 import Image from "next/image";
 import Notificationheader from "../_components/common/notificationheader";
+import { Input } from "../_components/ui/input";
+import ImageUploader from "../_components/common/image-uploader";
 
-export default function page() {
+export default function CreateProfilePage() {
+	const [username, setUsername] = useState("");
+
 	return (
 		<div className="w-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
 			<div>
@@ -17,20 +22,15 @@ export default function page() {
 					Create Profile
 				</h1>
 				<div className="self-stretch flex flex-col items-center justify-start text-[1.5rem] text-thistle">
-					<div className="w-[15rem] h-[15rem] rounded-481xl overflow-hidden shrink-0 flex flex-row items-center justify-center py-[3.437rem] px-[3.5rem] box-border bg-[url('/profile-picture@3x.png')] bg-cover bg-no-repeat bg-[top]">
-						<Image
-							className="h-[7.5rem] w-[7.5rem] relative overflow-hidden shrink-0 opacity-65"
-							loading="lazy"
-							alt=""
-							src="/tablericoncamera.svg"
-							width={500}
-							height={500}
+					<ImageUploader /	>
+					<div className="self-stretch rounded-lg bg-purple-600 flex flex-col items-start justify-start p-[0.75rem] z-[1] mt-[-1.75rem] gap-2">
+						<Input
+							type="text"
+							placeholder="Add User Name_"
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+							className="bg-transparent border-none text-primary placeholder:text-thistle focus-visible:ring-purple-400 text-2xl font-extrabold font-[inherit]"
 						/>
-					</div>
-					<div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-[0.75rem] z-[1] mt-[-1.75rem]">
-						<h3 className="m-0 relative text-inherit font-extrabold font-[inherit]">
-							Add User Name_
-						</h3>
 					</div>
 				</div>
 				<div className="self-stretch flex flex-col items-start justify-start gap-[1rem]">
