@@ -26,13 +26,7 @@ interface UserProfile {
 export default function CreateProfilePage() {
   const router = useRouter();
   const { user } = useDynamicContext();
-  const {
-    error: socialError,
-    isProcessing,
-    signInWithSocialAccount,
-    isLinked,
-    getLinkedAccountInformation,
-  } = useSocialAccounts();
+  const { error: socialError, signInWithSocialAccount } = useSocialAccounts();
 
   // const [isLoading, setIsLoading] = useState(true);
   const [showTeamSelection, setShowTeamSelection] = useState(false);
@@ -40,16 +34,17 @@ export default function CreateProfilePage() {
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // Only store minimal profile data in localStorage
-  const [profileData, setProfileData] = useState<UserProfile>(() => {
-    const savedProfile = localStorage.getItem("userProfile");
-    return savedProfile
-      ? JSON.parse(savedProfile)
-      : {
-          username: "",
-          profileImage: "/profile-picture@3x.png",
-          isWorldcoinVerified: false,
-        };
+  const [profileData, setProfileData] = useState<UserProfile>({
+    username: "",
+    profileImage: "",
+    isWorldcoinVerified: false,
   });
+  useEffect(() => {
+    const savedProfile = localStorage.getItem("userProfile");
+    if (savedProfile) {
+      setProfileData(JSON.parse(savedProfile));
+    }
+  }, []);
 
   // useEffect(() => {
   //   const checkExistingProfile = async () => {
