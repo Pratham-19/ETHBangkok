@@ -73,7 +73,7 @@ export default function CreateProfilePage() {
 					<section
 						className={`self-stretch flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[0.25rem] box-border gap-[2rem] max-w-full text-left text-[1rem] text-primary font-h3`}
 					>
-						<h1 className="m-0 self-stretch relative text-[2rem] font-extrabold font-[inherit]">
+						<h1 className="m-0 self-stretch relative text-[2rem] font-semibold font-[inherit]">
 							Create Profile
 						</h1>
 						<div className="self-stretch flex flex-col items-center justify-start text-[1.5rem] text-thistle">
@@ -84,7 +84,7 @@ export default function CreateProfilePage() {
 									placeholder="Add User Name_"
 									value={profileData.username}
 									onChange={handleUsernameChange}
-									className="bg-transparent border-none text-primary placeholder:text-thistle focus-visible:ring-purple-400 text-2xl font-extrabold font-[inherit]"
+									className="bg-transparent border-none text-primary placeholder:text-thistle focus-visible:ring-purple-400 text-2xl font-semibold font-[inherit]"
 								/>
 							</div>
 						</div>
@@ -147,7 +147,7 @@ export default function CreateProfilePage() {
 				</>
 			) : (
 				<>
-					<h1 className="m-0 self-stretch relative text-[2rem] text-center font-extrabold font-[inherit]">
+					<h1 className="m-0 self-stretch relative text-[2rem] text-center font-semibold font-[inherit]">
 						Create Profile
 					</h1>
 					<section className="self-stretch h-[39.875rem] flex flex-col items-start justify-start gap-[1rem]">

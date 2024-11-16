@@ -16,7 +16,7 @@ const Quest: FunctionComponent = () => {
 				/>
 				<Info />
 				<div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-[0.75rem]">
-					<h1 className="m-0 relative text-[1.5rem] font-extrabold font-h3 text-thistle text-left">
+					<h1 className="m-0 relative text-[1.5rem] font-semibold font-h3 text-thistle text-left">
 						Paste X url or transaction
 					</h1>
 				</div>

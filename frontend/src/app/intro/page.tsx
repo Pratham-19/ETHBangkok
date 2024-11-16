@@ -18,7 +18,7 @@ const Intro: FunctionComponent = () => {
 			/>
 			<section className="self-stretch flex flex-col items-end justify-between min-h-[16.25rem] text-left text-[1.5rem] text-primary font-h3">
 				<div className="self-stretch flex flex-col items-start justify-start gap-[1rem]">
-					<h3 className="m-0 self-stretch relative text-inherit font-extrabold font-[inherit]">
+					<h3 className="m-0 self-stretch relative text-inherit font-semibold font-[inherit]">
 						{!select ? "Welcome Quiller!!!" : "Earn passive income"}
 					</h3>
 					<div className="relative text-[1rem]">

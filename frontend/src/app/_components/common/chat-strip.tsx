@@ -31,7 +31,7 @@ const ChatStrip: FunctionComponent<ChatStripType> = ({
 			/>
 			<div className="flex-1 flex flex-col items-start justify-center gap-[0.5rem]">
 				<div className="self-stretch flex flex-row items-start justify-between">
-					<h1 className="m-0 relative text-inherit font-extrabold font-[inherit]">
+					<h1 className="m-0 relative text-inherit font-semibold font-[inherit]">
 						{userName}
 					</h1>
 					<div className="rounded bg-purple-400 flex flex-row items-center justify-start p-[0.125rem] gap-[0.125rem] text-[0.75rem] text-highlight">

@@ -15,14 +15,14 @@ const Completed: FunctionComponent = () => {
 		<div>
 			{/* Quest Title and Tabs */}
 			<section className="flex flex-col items-start p-4 text-left text-primary font-h3">
-				<h1 className="text-5xl font-extrabold mb-4">Quest</h1>
+				<h1 className="text-5xl font-semibold mb-4">Quest</h1>
 
 				{/* Shadcn Tabs */}
 				<Tabs defaultValue="completed" className="w-full">
 					<TabsList className="flex gap-2 mb-4 bg-purple-600 h-fit rounded-full">
 						<TabsTrigger
 							value="completed"
-							className="flex-1 text-center rounded-full font-extrabold text-[1.5rem] 
+							className="flex-1 text-center rounded-full font-semibold text-[1.5rem] 
 					   transition-colors duration-300 
 					   bg-primary text-primary
 					   data-[state=active]:bg-primary data-[state=active]:text-purple-900
@@ -32,7 +32,7 @@ const Completed: FunctionComponent = () => {
 						</TabsTrigger>
 						<TabsTrigger
 							value="ongoing"
-							className="flex-1 text-center rounded-full font-extrabold text-[1.5rem]
+							className="flex-1 text-center rounded-full font-semibold text-[1.5rem]
 					   transition-colors duration-300 
 					   bg-purple-600 text-primary 
 					   data-[state=active]:bg-primary 

@@ -150,7 +150,7 @@ export default function PlayableMap() {
 								{"avatarUrl" in modalState.selectedItem && (
 									<RainbowBorder>
 										<div className="w relative rounded-lg bg-purple-800 overflow-hidden flex flex-col items-center justify-between gap-y-2 py-[11px] px-3 max-w-full max-h-full text-left text-13xl text-primary font-h3">
-											<h1 className="m-0 self-stretch relative text-inherit font-extrabold font-[inherit]">
+											<h1 className="m-0 self-stretch relative text-inherit font-semibold font-[inherit]">
 												{modalState.selectedItem.name}
 											</h1>
 											<Image
@@ -163,7 +163,7 @@ export default function PlayableMap() {
 												width={500}
 												height={500}
 											/>
-											<h3 className="m-0 relative text-5xl font-extrabold font-[inherit]">
+											<h3 className="m-0 relative text-5xl font-semibold font-[inherit]">
 												Building in web3, catching all
 												the tokens.
 											</h3>

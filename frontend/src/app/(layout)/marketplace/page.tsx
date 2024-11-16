@@ -6,7 +6,7 @@ const page: FunctionComponent = () => {
 		<div>
 			<section className="self-stretch flex flex-row items-start justify-end py-[0rem] pl-[0.437rem] pr-[0.375rem] box-border max-w-full text-left text-[2rem] text-primary font-h3">
 				<div className="flex-1 overflow-hidden flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[6.312rem] box-border gap-[1rem] max-w-full">
-					<h1 className="m-0 self-stretch relative text-inherit font-extrabold font-[inherit]">
+					<h1 className="m-0 self-stretch relative text-inherit font-semibold font-[inherit]">
 						Crate Marketplace
 					</h1>
 					<div className="relative text-[1rem]">
