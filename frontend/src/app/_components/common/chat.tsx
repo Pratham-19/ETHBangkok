@@ -11,17 +11,19 @@ import {
 import { ethers } from "ethers";
 
 interface Message {
-  id: number;
+  id: string;  // Changed to string to use more unique IDs
   text: string | React.ReactNode;
   role: "user" | "bot";
   time: string;
 }
 
-const BLOCK_EXPLORER_URL = "https://base-sepolia.blockscout.com/"; // Change this based on your network
+const BLOCK_EXPLORER_URL = "https://base-sepolia.blockscout.com/";
+
+const generateMessageId = () => `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
 const initialMessages: Message[] = [
   {
-    id: 1,
+    id: generateMessageId(),
     text: "Hi! I am you in game assitant. Just tell me something like 'send 0.1 ETH to 0x...'",
     role: "bot",
     time: "0h ago",
@@ -82,14 +84,14 @@ const ChatComponent = () => {
     });
 
     const userMessage: Message = {
-      id: messages.length + 1,
+      id: generateMessageId(),
       text: newMessage,
       role: "user",
       time: currentTime,
     };
 
     const processingMessage: Message = {
-      id: messages.length + 2,
+      id: generateMessageId(),
       text: "Processing your request...",
       role: "bot",
       time: currentTime,
@@ -100,7 +102,6 @@ const ChatComponent = () => {
     setIsProcessing(true);
 
     try {
-      // Extract transfer details
       const response = await fetch("/api/extract", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -120,14 +121,12 @@ const ChatComponent = () => {
         throw new Error("Invalid wallet address provided");
       }
 
-      // Process transfer
       const result = await handleTransfer({ address, amount });
 
-      // Update messages with success
       setMessages((prev) => [
         ...prev.slice(0, -1), // Remove processing message
         {
-          id: messages.length + 3,
+          id: generateMessageId(),
           text: (
             <div className="flex items-center gap-2">
               <span>Transaction sent: </span>
@@ -137,7 +136,6 @@ const ChatComponent = () => {
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:text-blue-600 flex items-center gap-1"
               >
-                {/* {`${result..slice(0, 6)}...${result.transactionHash.slice(-4)}`} */}
                 <ExternalLink size={16} />
               </a>
             </div>
@@ -147,11 +145,10 @@ const ChatComponent = () => {
         },
       ]);
     } catch (error) {
-      // Update messages with error
       setMessages((prev) => [
-        ...prev.slice(0, -1), // Remove processing message
+        ...prev.slice(0, -1),
         {
-          id: messages.length + 3,
+          id: generateMessageId(),
           text: `Error: ${error instanceof Error ? error.message : "Transaction failed"}`,
           role: "bot",
           time: currentTime,
