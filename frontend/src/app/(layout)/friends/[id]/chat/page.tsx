@@ -1,5 +1,5 @@
 "use client";
-import ChatComponent from "@/app/_components/common/chat";
+import ChatComponent from "@/app/_components/common/ai-chat";
 import ChatStrip from "@/app/_components/common/chat-strip";
 import Menu from "@/app/_components/common/menu";
 import Notificationheader from "@/app/_components/common/notificationheader";
