@@ -1,8 +1,9 @@
 import express, { Request, Response } from 'express';
 import { healthCheck } from '../handler/health';
 import { getQuestAssets } from '../handler/quest';
-import { getDStackSigner, encryptData, storeInNillion, decryptData, retrieveFromNillion } from '../handler/store';
+import { encryptData, storeInNillion, decryptData, retrieveFromNillion } from '../handler/store';
 import { walletHandler } from '../handler/cdp-wallet';
+import { verifyEmail } from '../handler/vlayer';
 
 const router = express.Router();
 
@@ -68,5 +69,7 @@ router.get('/retrieve', async (req, res): Promise<any> => {
 });
 
 router.get('/test', walletHandler);
+
+router.get('/verify', verifyEmail);
 
 export default router;
