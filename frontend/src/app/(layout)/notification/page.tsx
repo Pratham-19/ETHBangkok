@@ -1,10 +1,6 @@
 "use client";
-import { FunctionComponent, useCallback } from "react";
-import Notificationheader from "../_components/common/notificationheader";
-import NotificationTop from "../_components/common/notification-top";
-import Menu from "../_components/common/menu";
-import { Dialog, DialogContent, DialogTrigger } from "../_components/ui/dialog";
-import NotificationComponent from "../_components/common/notificaitons-component";
+import { useCallback } from "react";
+import NotificationComponent from "../../_components/common/notificaitons-component";
 
 const page = () => {
 	const onAccordionHeaderClick = useCallback(
@@ -30,17 +26,7 @@ const page = () => {
 	);
 
 	return (
-		<div className="w-full h-screen flex flex-col bg-purple-800 p-4 box-border gap-4 overflow-hidden">
-			{/* Notification Header */}
-			<Notificationheader
-				notificationheaderBackdropFilter="blur(30px)"
-				notificationheaderBackgroundColor="rgba(26, 1, 26, 0.3)"
-				notificationheaderHeight="4.688rem"
-				notificationheaderPadding="1rem 0rem"
-				notificationheaderGap="0.5rem"
-				notificationheaderAlignSelf="stretch"
-			/>
-
+		<div>
 			{/* Title and Logo */}
 			<div className="flex items-center gap-2 py-2">
 				<img
@@ -72,24 +58,6 @@ const page = () => {
 				/>
 				{/* ))} */}
 			</section>
-
-			{/* Shadcn Dialog */}
-			<Dialog>
-				<DialogTrigger>Open Dialog</DialogTrigger>
-				<DialogContent>
-					<div className="p-4">
-						<h2 className="text-xl font-semibold">
-							Dialog Content
-						</h2>
-						<p>This is the content inside the Shadcn dialog.</p>
-					</div>
-				</DialogContent>
-			</Dialog>
-
-			{/* Fixed Menu at the Bottom */}
-			<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-md px-4">
-				<Menu property1="Default" back to="/" />
-			</div>
 		</div>
 	);
 };

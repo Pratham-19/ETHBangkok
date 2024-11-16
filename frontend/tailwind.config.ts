@@ -32,9 +32,9 @@ export default {
 				thistle: "rgba(255, 201, 243, 0.5)",
 				white: "#f7f7f7",
 			},
-			spacing: {},
 			fontFamily: {
-				h3: "'Host Grotesk'",
+				h3: ["Host Grotesk", "sans-serif"],
+				sans: ["Host Grotesk", "system-ui", "sans-serif"],
 			},
 			borderRadius: {
 				"81xl": "100px",
