@@ -1,14 +1,14 @@
 "use client";
 import { FunctionComponent } from "react";
-import Notificationheader from "../_components/common/notificationheader";
+import Notificationheader from "../../_components/common/notificationheader";
 import {
 	Tabs,
 	TabsContent,
 	TabsList,
 	TabsTrigger,
-} from "../_components/ui/tabs";
-import NotificationComponent from "../_components/common/notificaitons-component";
-import Menu from "../_components/common/menu";
+} from "../../_components/ui/tabs";
+import NotificationComponent from "../../_components/common/notificaitons-component";
+import Menu from "../../_components/common/menu";
 
 const Completed: FunctionComponent = () => {
 	return (

@@ -1,8 +1,8 @@
 "use client";
 import { FunctionComponent, useCallback } from "react";
-import Notificationheader from "../_components/common/notificationheader";
-import Menu from "../_components/common/menu";
-import ChatStrip from "../_components/common/chat-strip";
+import Notificationheader from "../../_components/common/notificationheader";
+import Menu from "../../_components/common/menu";
+import ChatStrip from "../../_components/common/chat-strip";
 
 const Friends: FunctionComponent = () => {
 	return (

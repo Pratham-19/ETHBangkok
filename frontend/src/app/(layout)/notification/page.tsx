@@ -1,10 +1,14 @@
 "use client";
 import { FunctionComponent, useCallback } from "react";
-import Notificationheader from "../_components/common/notificationheader";
-import NotificationTop from "../_components/common/notification-top";
-import Menu from "../_components/common/menu";
-import { Dialog, DialogContent, DialogTrigger } from "../_components/ui/dialog";
-import NotificationComponent from "../_components/common/notificaitons-component";
+import Notificationheader from "../../_components/common/notificationheader";
+import NotificationTop from "../../_components/common/notification-top";
+import Menu from "../../_components/common/menu";
+import {
+	Dialog,
+	DialogContent,
+	DialogTrigger,
+} from "../../_components/ui/dialog";
+import NotificationComponent from "../../_components/common/notificaitons-component";
 
 const page = () => {
 	const onAccordionHeaderClick = useCallback(

@@ -1,12 +1,12 @@
 "use client";
 import React, { useCallback, useState } from "react";
-import ThemeButton from "../_components/common/theme-button";
-import Icon from "../_components/common/icon";
+import ThemeButton from "../../_components/common/theme-button";
+import Icon from "../../_components/common/icon";
 import Image from "next/image";
-import Notificationheader from "../_components/common/notificationheader";
-import { Input } from "../_components/ui/input";
-import ImageUploader from "../_components/common/image-uploader";
-import FrameComponent from "../_components/common/frame-component";
+import Notificationheader from "../../_components/common/notificationheader";
+import { Input } from "../../_components/ui/input";
+import ImageUploader from "../../_components/common/image-uploader";
+import FrameComponent from "../../_components/common/frame-component";
 
 // Define types for profile data
 interface ProfileData {
@@ -50,15 +50,18 @@ export default function CreateProfilePage() {
 	};
 
 	// Handler for team selection
-	const handleTeamSelect = useCallback((selection: TeamSelection) => {
-		const updatedProfileData = {
-		  ...profileData,
-		  team: selection,
-		};
-		
-		setProfileData(updatedProfileData);
-		console.log("Final Profile Data:", updatedProfileData);
-	}, [profileData]);
+	const handleTeamSelect = useCallback(
+		(selection: TeamSelection) => {
+			const updatedProfileData = {
+				...profileData,
+				team: selection,
+			};
+
+			setProfileData(updatedProfileData);
+			console.log("Final Profile Data:", updatedProfileData);
+		},
+		[profileData]
+	);
 
 	return (
 		<div className="w-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
