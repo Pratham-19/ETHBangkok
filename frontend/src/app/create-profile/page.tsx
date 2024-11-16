@@ -65,19 +65,21 @@ export default function CreateProfilePage() {
       try {
         if (typeof isLinked === "function") {
           const isTwitterConnected = isLinked(ProviderEnum.Twitter);
-          
+
           if (isTwitterConnected) {
             // Get Twitter account information if available
-            const accountInfo = getLinkedAccountInformation?.(ProviderEnum.Twitter);
+            const accountInfo = getLinkedAccountInformation?.(
+              ProviderEnum.Twitter
+            );
             console.log("Twitter account info:", accountInfo);
-            
+
             // Redirect to intro page if connected
             router.push("/intro");
             return;
           }
-          
+
           // Update local state if not redirecting
-          setProfileData(prev => ({
+          setProfileData((prev) => ({
             ...prev,
             connectedAccounts: {
               ...prev.connectedAccounts,
@@ -104,7 +106,7 @@ export default function CreateProfilePage() {
 
     try {
       await signInWithSocialAccount(provider);
-      
+
       if (provider === ProviderEnum.Twitter) {
         // After successful connection, redirect to intro page
         router.push("/intro");
@@ -118,26 +120,29 @@ export default function CreateProfilePage() {
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileData(prev => ({
+    setProfileData((prev) => ({
       ...prev,
       username: e.target.value,
     }));
   };
 
   const handleImageUpload = (imageUrl: string) => {
-    setProfileData(prev => ({
+    setProfileData((prev) => ({
       ...prev,
       profileImage: imageUrl,
     }));
   };
 
-  const handleTeamSelect = useCallback((selection: TeamSelection) => {
-    setProfileData(prev => ({
-      ...prev,
-      team: selection,
-    }));
-    router.push("/intro");
-  }, [router]);
+  const handleTeamSelect = useCallback(
+    (selection: TeamSelection) => {
+      setProfileData((prev) => ({
+        ...prev,
+        team: selection,
+      }));
+      router.push("/intro");
+    },
+    [router]
+  );
 
   const handleSkip = () => {
     setNext(true);
@@ -173,22 +178,22 @@ export default function CreateProfilePage() {
       isConnected: profileData.connectedAccounts.google,
     },
     {
-      text: "Coinbase Log In",
-      icon: "/tabler-icon-brand-coinbase.svg",
+      text: "Coinbase Login",
+      icon: "/coinbase-logo-1.svg",
       onClick: undefined,
       isConnected: profileData.connectedAccounts.farcaster,
     },
   ];
 
   return (
-    <div className="w-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
+    <div className="size-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
       <div>
         <Notificationheader />
       </div>
       {!next ? (
         <>
-          <section className="self-stretch flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[0.25rem] box-border gap-[2rem] max-w-full text-left text-[1rem] text-primary font-h3">
-            <h1 className="m-0 self-stretch relative text-[2rem] font-semibold font-[inherit]">
+          <section className="self-stretch flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[0.25rem] box-border gap-[2rem] max-w-full text-left text-[1rem] text-primary  ">
+            <h1 className="m-0 self-stretch relative text-[2rem] font-semibold  ">
               Create Profile
             </h1>
             <div className="self-stretch flex flex-col items-center justify-start text-[1.5rem] text-thistle">
@@ -199,13 +204,14 @@ export default function CreateProfilePage() {
                   placeholder="Add User Name_"
                   value={profileData.username}
                   onChange={handleUsernameChange}
-                  className="bg-transparent border-none text-primary placeholder:text-thistle focus-visible:ring-purple-400 text-2xl font-semibold font-[inherit]"
+                  className="bg-transparent border-none text-primary placeholder:text-thistle focus-visible:ring-purple-400 text-2xl font-semibold  "
                 />
               </div>
             </div>
             <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem]">
               <div className="relative">
-                Join 0xCity with any of the following accounts and start exploring to earn!
+                Join 0xCity with any of the following accounts and start
+                exploring to earn!
               </div>
               {connectionError && (
                 <div className="text-red-500 text-sm">{connectionError}</div>
@@ -215,13 +221,14 @@ export default function CreateProfilePage() {
                   <div
                     key={index}
                     onClick={button.onClick}
-                    className={`${button.onClick && !isConnecting ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                    className={`${button.onClick && !isConnecting ? "cursor-pointer" : "cursor-not-allowed"}`}
                   >
                     <ThemeButton
                       btn="large"
                       text={button.text}
+                      className="w-full whitespace-nowrap text-ellipsis overflow-hidden"
                       tablerIconBrandX={button.icon}
-                      defaultGap={"0.5rem"}
+                      defaultGap={"0.3rem"}
                     />
                   </div>
                 ))}
@@ -235,7 +242,7 @@ export default function CreateProfilePage() {
                 />
               </div>
             </div>
-            <div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center px-4">
+            <div className="z-50 flex justify-center px-4">
               <div className="w-full max-w-md">
                 <div className="self-stretch flex flex-row items-start justify-center gap-[1rem] max-w-full">
                   <div className="flex-1 relative inline-block min-w-[12.125rem] max-w-full box-border pl-[1.25rem] pr-[1.25rem]">
@@ -254,8 +261,8 @@ export default function CreateProfilePage() {
         </>
       ) : (
         <>
-          <h1 className="m-0 self-stretch relative text-[2rem] text-center font-semibold font-[inherit]">
-            Create Profile
+          <h1 className="m-0 self-stretch relative text-[2rem] text-center font-semibold text-[#ffc9f3]">
+            Join a team
           </h1>
           <section className="self-stretch h-[39.875rem] flex flex-col items-start justify-start gap-[1rem]">
             <FrameComponent

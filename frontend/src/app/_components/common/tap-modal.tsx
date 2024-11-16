@@ -16,7 +16,7 @@ const TapModal: FunctionComponent<TapModalType> = ({
 }) => {
   return (
     <div
-      className={`w-[180px] relative [backdrop-filter:blur(20px)] rounded-lg bg-gray-100 flex flex-col items-start justify-start p-2 box-border gap-1 max-w-full max-h-full overflow-auto text-left text-base text-primary font-h3 ${className}`}
+      className={`w-[180px] relative [backdrop-filter:blur(20px)] rounded-lg bg-gray-100 flex flex-col items-start justify-start p-2 box-border gap-1 max-w-full max-h-full overflow-auto text-left text-base text-primary   ${className}`}
     >
       <div className="self-stretch flex flex-row items-center justify-between">
         <div className="relative">{title}</div>
