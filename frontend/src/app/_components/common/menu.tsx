@@ -119,7 +119,7 @@ const Menu: FunctionComponent<MenuType> = ({
 					property1="def"
 					to="/ai-chat"
 					iconPadding="0.5rem"
-					tablerIconArrowBigRight="/tablericonmessages-3.svg"
+					tablerIconArrowBigRight="/aichat.svg"
 					tablerIconArrowBigRightHeight="1.5rem"
 					tablerIconArrowBigRightWidth="1.5rem"
 				/>
