@@ -58,7 +58,7 @@ const PlayerProfile: FunctionComponent<PlayerProfileType> = ({
 
         <div className="flex-1 flex flex-col items-start justify-center gap-2 min-w-[9.438rem] overflow-hidden">
           <h1 className="m-0 self-stretch relative text-[2rem] font-semibold text-primary truncate">
-            {profileData?.username || "Loading..."}
+            {profileData?.username || "Sage"}
           </h1>
 
           <div className="relative text-[1rem] text-thistle overflow-hidden text-wrap whitespace-nowrap w-full">
