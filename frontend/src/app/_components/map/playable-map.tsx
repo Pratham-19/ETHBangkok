@@ -13,6 +13,7 @@ import {
 import ThemeButton from "../common/theme-button";
 import RainbowBorder from "../common/rainbow-border";
 import Image from "next/image";
+import Info from "../common/info";
 
 export default function PlayableMap() {
 	// Static data memoization remains the same
@@ -189,11 +190,57 @@ export default function PlayableMap() {
 									</RainbowBorder>
 								)}
 								{"logoUrl" in modalState.selectedItem && (
-									<img
-										src={modalState.selectedItem.logoUrl}
-										alt={modalState.selectedItem.name}
-										className="w-20 h-20 rounded-full mx-auto"
-									/>
+									<RainbowBorder>
+										<div className="pb-4">
+											<Info
+												tokenImage="/tokenpic1.svg"
+												tokenName="TokenName"
+												tokenType="meme"
+												timeAgo="h"
+												description="CityMapper DePIN is a decentralized physical infrastructure network designed to collaboratively map cities using blockchain technology. By harnessing the power of community contributors equipped with IoT devices, drones, and smartphones, the project aims to create real-time, detailed urban maps that include streets, buildings, traffic patterns, and environmental data. Participants are rewarded with tokens for contributing accurate data, supporting applications in navigation, urban planning, and smart city initiatives, all while ensuring transparency and community-driven governance."
+												rewardAmount="1000"
+												rewardSymbol="$TKN1"
+												className="custom-class py-4"
+											/>
+											<div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-[0.75rem]">
+												<h1 className="m-0 relative text-[1.5rem] font-semibold font-h3 text-thistle text-left">
+													Paste X url or transaction
+												</h1>
+											</div>
+										</div>
+										<div className="self-stretch flex flex-row items-center justify-end flex-wrap content-center gap-[1rem]">
+											<ThemeButton
+												btn="large"
+												text="VR watch"
+												defaultFlex="1"
+												defaultHeight="2.5rem"
+												defaultPadding="0.5rem 1rem"
+												defaultGap="0.125rem"
+												tablerIconBrandX="/tablericoncamera.svg"
+												tablerIconBrandXHeight="1.5rem"
+												tablerIconBrandXWidth="1.5rem"
+												brandLabelHeight="unset"
+												brandLabelDisplay="unset"
+												brandLabelFontSize="1rem"
+												brandLabelWidth="unset"
+											/>
+											<ThemeButton
+												btn="large"
+												text="Go to Task"
+												defaultFlex="1"
+												defaultHeight="2.5rem"
+												defaultPadding="0.5rem 1rem"
+												defaultGap="0.125rem"
+												tablerIconBrandX="/tablericonexternallink.svg"
+												tablerIconBrandXHeight="1.5rem"
+												tablerIconBrandXWidth="1.5rem"
+												brandLabelHeight="unset"
+												brandLabelDisplay="unset"
+												brandLabelFontSize="1rem"
+												brandLabelWidth="unset"
+											/>
+										</div>
+									</RainbowBorder>
 								)}
 							</div>
 						)}
