@@ -12,23 +12,7 @@ import Menu from "../../_components/common/menu";
 
 const Completed: FunctionComponent = () => {
 	return (
-		<div className="w-full h-screen flex flex-col bg-purple-800 overflow-hidden">
-			{/* Notification Header */}
-			<Notificationheader
-				notificationheaderBackdropFilter="blur(30px)"
-				notificationheaderBackgroundColor="rgba(26, 1, 26, 0.3)"
-				notificationheaderHeight="4.688rem"
-				notificationheaderPadding="1rem 0rem"
-				notificationheaderGap="0.5rem"
-				notificationheaderAlignSelf="stretch"
-				notificationheaderWidth="unset"
-				tablerIcon3dCubeSphereHeight="2.5rem"
-				tablerIcon3dCubeSphereWidth="2.5rem"
-				appNameMargin="0"
-				appNameTextDecoration="unset"
-				appNameFontSize="2rem"
-			/>
-
+		<div>
 			{/* Quest Title and Tabs */}
 			<section className="flex flex-col items-start p-4 text-left text-primary font-h3">
 				<h1 className="text-5xl font-extrabold mb-4">Quest</h1>
@@ -96,11 +80,6 @@ const Completed: FunctionComponent = () => {
 					</div>
 				</Tabs>
 			</section>
-
-			{/* Bottom Menu */}
-			<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-md px-4">
-				<Menu property1="Default" back to="/" />
-			</div>
 		</div>
 	);
 };

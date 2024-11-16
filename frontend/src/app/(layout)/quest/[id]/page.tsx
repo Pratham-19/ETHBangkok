@@ -6,21 +6,7 @@ import { FunctionComponent, useCallback } from "react";
 
 const Quest: FunctionComponent = () => {
 	return (
-		<div className="w-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[1rem] leading-[normal] tracking-[normal]">
-			<Notificationheader
-				notificationheaderBackdropFilter="blur(30px)"
-				notificationheaderBackgroundColor="rgba(26, 1, 26, 0.3)"
-				notificationheaderHeight="4.688rem"
-				notificationheaderPadding="1rem 0rem"
-				notificationheaderGap="0.5rem"
-				notificationheaderAlignSelf="unset"
-				notificationheaderWidth="22.563rem"
-				tablerIcon3dCubeSphereHeight="2.5rem"
-				tablerIcon3dCubeSphereWidth="2.5rem"
-				appNameMargin="unset"
-				appNameTextDecoration="none"
-				appNameFontSize="2rem"
-			/>
+		<div>
 			<form className="m-0 self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[2.25rem] gap-[1rem]">
 				<img
 					className="self-stretch relative rounded-lg max-w-full overflow-hidden max-h-full object-cover"
@@ -67,23 +53,6 @@ const Quest: FunctionComponent = () => {
 					/>
 				</div>
 			</form>
-			<Menu
-				property1="Default"
-				back
-				menuAlignSelf="stretch"
-				menuHeight="unset"
-				menuGap="0.5rem"
-				menuWidth="unset"
-				to="/"
-				iconWidth="2.625rem"
-				iconHeight="2.625rem"
-				menuButtonsPadding="0.5rem"
-				iconHeight1="3rem"
-				iconWidth1="3rem"
-				iconPadding="0rem 0.375rem"
-				tablerIconUserCircleHeight="2rem"
-				tablerIconUserCircleWidth="2rem"
-			/>
 		</div>
 	);
 };
