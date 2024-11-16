@@ -14,7 +14,16 @@ const Quest: FunctionComponent = () => {
 					alt=""
 					src="/frame-87@2x.png"
 				/>
-				<Info />
+				<Info
+					tokenImage="/tokenpic1.svg"
+					tokenName="TokenName"
+					tokenType="meme"
+					timeAgo="h"
+					description="CityMapper DePIN is a decentralized physical infrastructure network designed to collaboratively map cities using blockchain technology. By harnessing the power of community contributors equipped with IoT devices, drones, and smartphones, the project aims to create real-time, detailed urban maps that include streets, buildings, traffic patterns, and environmental data. Participants are rewarded with tokens for contributing accurate data, supporting applications in navigation, urban planning, and smart city initiatives, all while ensuring transparency and community-driven governance."
+					rewardAmount="1000"
+					rewardSymbol="$TKN1"
+					className="custom-class py-4"
+				/>
 				<div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-[0.75rem]">
 					<h1 className="m-0 relative text-[1.5rem] font-semibold font-h3 text-thistle text-left">
 						Paste X url or transaction
