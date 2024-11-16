@@ -186,7 +186,7 @@ export default function CreateProfilePage() {
   ];
 
   return (
-    <div className="size-full relative bg-purple-800 overflow-hidden flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
+    <div className="size-full relative bg-purple-800 overflow-y-auto flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
       <div>
         <Notificationheader />
       </div>
