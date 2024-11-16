@@ -61,34 +61,20 @@ const Notificationheader: FunctionComponent<NotificationheaderType> = ({
 		};
 	}, [tablerIcon3dCubeSphereHeight, tablerIcon3dCubeSphereWidth]);
 
-	const appNameStyle: CSSProperties = useMemo(() => {
-		return {
-			margin: appNameMargin,
-			textDecoration: appNameTextDecoration,
-			fontSize: appNameFontSize,
-		};
-	}, [appNameMargin, appNameTextDecoration, appNameFontSize]);
-
 	return (
 		<div
-			className={`self-stretch [backdrop-filter:blur(30px)] bg-gray-200 flex flex-row items-center justify-center py-[1rem] px-[0rem] gap-[0.5rem] text-left text-[2rem] font-h3 ${className}`}
+			className={`self-stretch [backdrop-filter:blur(30px)] bg-gray-200 flex flex-row items-center justify-center px-[0rem] gap-[0.5rem] text-left pt-10 ${className}`}
 			style={notificationheaderStyle}
 		>
 			<Image
-				className="h-[2.5rem] w-[2.5rem] relative overflow-hidden shrink-0"
+				className="w-40 relative overflow-hidden shrink-0"
 				loading="lazy"
 				alt=""
-				src="/tablericon3dcubesphere.svg"
+				src="/logo.svg"
 				style={tablerIcon3dCubeSphereStyle}
 				width={500}
 				height={500}
 			/>
-			<h1
-				className="m-0 relative text-inherit font-extrabold font-[inherit] text-transparent !bg-clip-text [background:linear-gradient(88.39deg,_#a9ff84,_#7fffe1_33%,_#f98cff_66%,_#ffeb89)] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]"
-				style={appNameStyle}
-			>
-				appName
-			</h1>
 		</div>
 	);
 };
