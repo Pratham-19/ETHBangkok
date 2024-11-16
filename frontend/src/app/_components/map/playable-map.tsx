@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import MapComponent from "@/app/_components/map/map";
 import { User, Token, Crate } from "@/types/types";
 
-export default function PlayableArea() {
+export default function PlayableMap() {
   // State for the current user
   const [currentUser, setCurrentUser] = useState<User>({
     id: "current",
     latitude: 0, // Default value until geolocation is retrieved
     longitude: 0, // Default value until geolocation is retrieved
     name: "You",
-    avatarUrl: "/pp-dog.png",
+    avatarUrl: "/game-assets/pp-dog.png",
   });
 
   // List of other users on the map
@@ -39,19 +39,19 @@ export default function PlayableArea() {
       longitude: 100.55939609285565,
       symbol: "SHIB",
       name: "Shiba Inu",
-      logoUrl: "/token-pic.png",
+      logoUrl: "/game-assets/token-pic.png",
       backgroundColor: "#8A2BE2",
     },
-    {
-      id: "2",
-      latitude: 13.723702,
-      longitude: 100.55939609285565,
-      symbol: "USDT",
-      name: "Tether",
-      logoUrl:
-        "https://www.iconarchive.com/download/i109679/cjdowner/cryptocurrency-flat/Tether-USDT.1024.png",
-      backgroundColor: "#28A745",
-    },
+    // {
+    //   id: "2",
+    //   latitude: 13.723702,
+    //   longitude: 100.55939609285565,
+    //   symbol: "USDT",
+    //   name: "Tether",
+    //   logoUrl:
+    //     "https://www.iconarchive.com/download/i109679/cjdowner/cryptocurrency-flat/Tether-USDT.1024.png",
+    //   backgroundColor: "#28A745",
+    // },
   ];
 
   // Crates available on the map
@@ -94,7 +94,7 @@ export default function PlayableArea() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center h-full">
+    <main className="flex flex-col items-center justify-center h-screen">
       <MapComponent
         tokens={tokens}
         crates={crates}
