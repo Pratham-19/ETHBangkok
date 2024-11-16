@@ -37,8 +37,8 @@ contract HelperConfig is Script {
         }
     }
 
-    function getChronicleDetails(uint256 chainId_) public view returns (ChronicleDetails memory) {
-        return chronicleDetails[chainId_];
+    function getChronicleDetails(uint256 chainId_) public view returns (address chronicle, address selfKisser) {
+        return (chronicleDetails[chainId_].chronicle, chronicleDetails[chainId_].selfKisser);
     }
 
     function getPythEntropy(uint256 chainId_) public view returns (address) {
@@ -57,6 +57,12 @@ contract HelperConfig is Script {
 
     function getDataAttester(uint256 chainId_) public view returns (address) {
         address dataValidatorHook = DevOpsTools.get_most_recent_deployment("DataAttester", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getRandomNumberContract(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("RandomNumber", chainId_);
 
         return dataValidatorHook;
     }

@@ -1,16 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.28;
 
-import {IEntropy} from "@pythnetwork/entropy-sdk-solidity/IEntropy.sol";
-import {IEntropyConsumer} from "@pythnetwork/entropy-sdk-solidity/IEntropyConsumer.sol";
+import {IEntropy} from "node_modules/@pythnetwork/entropy-sdk-solidity/IEntropy.sol";
+import {IEntropyConsumer} from "node_modules/@pythnetwork/entropy-sdk-solidity/IEntropyConsumer.sol";
 
 contract RandomNumber {
+    event RandomNumberReceived(bytes32 randomNumber);
+
     address public immutable i_entropy;
 
-    IEntropy entropy = IEntropy(i_entropy);
+    IEntropy entropy;
 
     constructor(address entropy_) {
         i_entropy = entropy_;
+        entropy = IEntropy(entropy_);
     }
 
     function getEntropy() internal view returns (address) {
@@ -34,5 +37,7 @@ contract RandomNumber {
         bytes32 randomNumber
     ) internal {
         // Implement your callback logic here.
+
+        emit RandomNumberReceived(randomNumber);
     }
 }

@@ -101,3 +101,9 @@ setSPInstance:
 
 testAttest:
 	@forge script script/interactions/i_DataAttester.s.sol:TestAttest $(NETWORK_ARGS)
+
+deployRandomNumber:
+	@forge script script/DeployRandomNumber.s.sol:DeployRandomNumber $(NETWORK_ARGS)
+
+getRandomNumber:
+	@forge script script/interactions/i_RandomNumber.s.sol:GetRandomNumber $(NETWORK_ARGS)

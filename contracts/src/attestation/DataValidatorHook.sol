@@ -3,9 +3,9 @@ pragma solidity ^0.8.26;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/interfaces/IERC20.sol";
-import {ISP} from "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol";
-import {ISPHook} from "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol";
-import {Attestation} from "@ethsign/sign-protocol-evm/src/models/Attestation.sol";
+import {ISP} from "node_modules/@ethsign/sign-protocol-evm/src/interfaces/ISP.sol";
+import {ISPHook} from "node_modules/@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol";
+import {Attestation} from "node_modules/@ethsign/sign-protocol-evm/src/models/Attestation.sol";
 
 // @dev This contract manages attestation data validation logic.
 contract DataValidator is Ownable {
