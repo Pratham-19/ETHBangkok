@@ -6,33 +6,26 @@ import Notificationheader from "../_components/common/notificationheader";
 import { Input } from "../_components/ui/input";
 import ImageUploader from "../_components/common/image-uploader";
 import FrameComponent from "../_components/common/frame-component";
-import { useSocialAccounts } from "@dynamic-labs/sdk-react-core";
+import {
+  useDynamicContext,
+  useSocialAccounts,
+} from "@dynamic-labs/sdk-react-core";
 import { ProviderEnum } from "@dynamic-labs/types";
 import { useRouter } from "next/navigation";
 
-interface ProfileData {
+interface UserProfile {
   username: string;
   profileImage: string;
-  team: {
+  team?: {
     primary: string;
     secondary: string;
-  } | null;
-  connectedAccounts: {
-    twitter: boolean;
-    worldcoin: boolean;
-    google: boolean;
-    farcaster: boolean;
-    ethGlobal: boolean;
   };
-}
-
-interface TeamSelection {
-  primary: string;
-  secondary: string;
+  isWorldcoinVerified: boolean;
 }
 
 export default function CreateProfilePage() {
   const router = useRouter();
+  const { user } = useDynamicContext();
   const {
     error: socialError,
     isProcessing,
@@ -41,62 +34,50 @@ export default function CreateProfilePage() {
     getLinkedAccountInformation,
   } = useSocialAccounts();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [profileData, setProfileData] = useState<ProfileData>({
-    username: "",
-    profileImage: "/profile-picture@3x.png",
-    team: null,
-    connectedAccounts: {
-      twitter: false,
-      worldcoin: false,
-      google: false,
-      farcaster: false,
-      ethGlobal: false,
-    },
-  });
-
-  const [next, setNext] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
+  const [showTeamSelection, setShowTeamSelection] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
-  // Check authentication status and redirect if necessary
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        if (typeof isLinked === "function") {
-          const isTwitterConnected = isLinked(ProviderEnum.Twitter);
+  // Only store minimal profile data in localStorage
+  const [profileData, setProfileData] = useState<UserProfile>(() => {
+    const savedProfile = localStorage.getItem("userProfile");
+    return savedProfile
+      ? JSON.parse(savedProfile)
+      : {
+          username: "",
+          profileImage: "/profile-picture@3x.png",
+          isWorldcoinVerified: false,
+        };
+  });
 
-          if (isTwitterConnected) {
-            // Get Twitter account information if available
-            const accountInfo = getLinkedAccountInformation?.(
-              ProviderEnum.Twitter
-            );
-            console.log("Twitter account info:", accountInfo);
+  // useEffect(() => {
+  //   const checkExistingProfile = async () => {
+  //     try {
+  //       const savedProfile = localStorage.getItem("userProfile");
+  //       if (savedProfile) {
+  //         const parsedProfile = JSON.parse(savedProfile);
+  //         setProfileData(parsedProfile);
 
-            // Redirect to intro page if connected
-            router.push("/intro");
-            return;
-          }
+  //         if (!parsedProfile.team) {
+  //           setShowTeamSelection(true);
+  //         } else {
+  //           router.push("/intro");
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("Profile check error:", error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-          // Update local state if not redirecting
-          setProfileData((prev) => ({
-            ...prev,
-            connectedAccounts: {
-              ...prev.connectedAccounts,
-              twitter: isTwitterConnected,
-            },
-          }));
-        }
-      } catch (error) {
-        console.error("Auth check error:", error);
-        setConnectionError("Failed to check authentication status");
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  //   checkExistingProfile();
+  // }, [router]);
 
-    checkAuth();
-  }, [isLinked, getLinkedAccountInformation, router]);
+  const saveProfile = useCallback((profile: UserProfile) => {
+    localStorage.setItem("userProfile", JSON.stringify(profile));
+  }, []);
 
   const handleConnect = async (provider: ProviderEnum) => {
     if (!signInWithSocialAccount || isConnecting) return;
@@ -106,11 +87,6 @@ export default function CreateProfilePage() {
 
     try {
       await signInWithSocialAccount(provider);
-
-      if (provider === ProviderEnum.Twitter) {
-        // After successful connection, redirect to intro page
-        router.push("/intro");
-      }
     } catch (err) {
       console.error(`Failed to connect ${provider}:`, err);
       setConnectionError(`Failed to connect ${provider}. Please try again.`);
@@ -120,68 +96,74 @@ export default function CreateProfilePage() {
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileData((prev) => ({
-      ...prev,
+    const updatedProfile = {
+      ...profileData,
       username: e.target.value,
-    }));
+    };
+    setProfileData(updatedProfile);
+    saveProfile(updatedProfile);
   };
 
   const handleImageUpload = (imageUrl: string) => {
-    setProfileData((prev) => ({
-      ...prev,
+    const updatedProfile = {
+      ...profileData,
       profileImage: imageUrl,
-    }));
+    };
+    setProfileData(updatedProfile);
+    saveProfile(updatedProfile);
   };
 
   const handleTeamSelect = useCallback(
-    (selection: TeamSelection) => {
-      setProfileData((prev) => ({
-        ...prev,
+    (selection: { primary: string; secondary: string }) => {
+      const updatedProfile = {
+        ...profileData,
         team: selection,
-      }));
+      };
+      setProfileData(updatedProfile);
+      saveProfile(updatedProfile);
       router.push("/intro");
     },
-    [router]
+    [profileData, saveProfile, router]
   );
 
   const handleSkip = () => {
-    setNext(true);
+    setShowTeamSelection(true);
   };
 
-  // If initial loading, show loading state
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center bg-purple-800">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
-  }
-
-  // Social connection buttons configuration
+  // if (isLoading) {
+  //   return (
+  //     <div className="w-full h-screen flex items-center justify-center bg-purple-800">
+  //       <div className="text-white">Loading...</div>
+  //     </div>
+  //   );
+  // }
+  useEffect(() => {
+    if (user) {
+      setShowTeamSelection(true);
+    }
+  }, [user]);
   const socialButtons = [
     {
-      text: profileData.connectedAccounts.twitter ? "Connected" : "Connect X",
+      text: "Connect X",
       icon: "/tablericonbrandx.svg",
       onClick: () => handleConnect(ProviderEnum.Twitter),
-      isConnected: profileData.connectedAccounts.twitter,
     },
     {
-      text: "World Connect",
+      text: profileData.isWorldcoinVerified
+        ? "Verified  World ID"
+        : "VerifyWorld ID",
       icon: "/worldcoinlogo-1.svg",
       onClick: undefined,
-      isConnected: profileData.connectedAccounts.worldcoin,
     },
     {
-      text: "Google Login",
+      text: "Connect Google",
       icon: "/icon-google.svg",
-      onClick: undefined,
-      isConnected: profileData.connectedAccounts.google,
+      onClick: () => handleConnect(ProviderEnum.Google),
     },
     {
       text: "Coinbase Login",
       icon: "/coinbase-logo-1.svg",
       onClick: undefined,
-      isConnected: profileData.connectedAccounts.farcaster,
     },
   ];
 
@@ -190,7 +172,7 @@ export default function CreateProfilePage() {
       <div>
         <Notificationheader />
       </div>
-      {!next ? (
+      {!showTeamSelection ? (
         <>
           <section className="self-stretch flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[0.25rem] box-border gap-[2rem] max-w-full text-left text-[1rem] text-primary  ">
             <h1 className="m-0 self-stretch relative text-[2rem] font-semibold  ">

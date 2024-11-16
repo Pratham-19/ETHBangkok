@@ -63,7 +63,7 @@ const Notificationheader: FunctionComponent<NotificationheaderType> = ({
 
   return (
     <div
-      className={`self-stretch [backdrop-filter:blur(30px)] bg-gray-200 flex flex-row items-center justify-center px-[0rem] gap-[0.5rem] text-left pt-6 ${className}`}
+      className={`self-stretch [backdrop-filter:blur(30px)] bg-gray-200 flex flex-row items-center justify-center px-[0rem] gap-[0.5rem] text-left pt-4 ${className}`}
       style={notificationheaderStyle}
     >
       <Image
