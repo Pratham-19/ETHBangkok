@@ -51,7 +51,7 @@ const Intro: FunctionComponent = () => {
 					</div>
 				) : (
 					<div className="flex flex-row items-center justify-start gap-[1rem] text-[1rem] text-highlight">
-						<div className="h-[2.5rem] shadow-[0px_-2px_4px_rgba(0,_0,_0,_0.5)_inset,_0px_4px_2px_rgba(255,_255,_255,_0.3)_inset] rounded-81xl bg-primary border-purple-400 border-[1px] border-solid box-border overflow-hidden flex flex-row items-center justify-center py-[0.375rem] px-[2.125rem] gap-[0.5rem]">
+						{/* <div className="h-[2.5rem] shadow-[0px_-2px_4px_rgba(0,_0,_0,_0.5)_inset,_0px_4px_2px_rgba(255,_255,_255,_0.3)_inset] rounded-81xl bg-primary border-purple-400 border-[1px] border-solid box-border overflow-hidden flex flex-row items-center justify-center py-[0.375rem] px-[2.125rem] gap-[0.5rem]">
 							<Image
 								className="h-[1.5rem] w-[3.375rem] relative overflow-hidden shrink-0"
 								loading="lazy"
@@ -61,7 +61,7 @@ const Intro: FunctionComponent = () => {
 								height={500}
 							/>
 							<div className="relative">Buy Noun to own land</div>
-						</div>
+						</div> */}
 						<Icon
 							property1="def"
 							to="/"

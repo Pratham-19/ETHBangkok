@@ -25,23 +25,10 @@ const IntroNotificationBar: FunctionComponent<IntroNotificationBarType> = ({
 
 	return (
 		<section
-			className={`self-stretch h-[33rem] rounded-2xl overflow-hidden shrink-0 flex flex-col items-end justify-between bg-[url('/frame-691@3x.png')] bg-cover bg-no-repeat bg-[top] ${className}`}
+			className={`self-stretch rounded-2xl overflow-hidden shrink-0 flex flex-col items-end justify-between bg-[url('/frame-691@3x.png')] bg-cover bg-no-repeat bg-[top] ${className}`}
 			style={frameSectionStyle}
 		>
-			<Notificationheader
-				notificationheaderBackdropFilter="blur(20px)"
-				notificationheaderBackgroundColor="rgba(26, 1, 26, 0.6)"
-				notificationheaderHeight="unset"
-				notificationheaderPadding="1rem 0rem"
-				notificationheaderGap="0.5rem"
-				notificationheaderAlignSelf="stretch"
-				notificationheaderWidth="unset"
-				tablerIcon3dCubeSphereHeight="2.5rem"
-				tablerIcon3dCubeSphereWidth="2.5rem"
-				appNameMargin="unset"
-				appNameTextDecoration="none"
-				appNameFontSize="2rem"
-			/>
+			<Notificationheader className="pb-[1rem]" />
 			<img
 				className="self-stretch relative max-w-full overflow-hidden max-h-full object-cover z-[1]"
 				alt=""
