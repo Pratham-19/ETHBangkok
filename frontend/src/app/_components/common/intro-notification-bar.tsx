@@ -25,7 +25,7 @@ const IntroNotificationBar: FunctionComponent<IntroNotificationBarType> = ({
 
 	return (
 		<section
-			className={`self-stretch h-[33rem] rounded-2xl overflow-hidden shrink-0 flex flex-col items-end justify-between bg-[url('/public/frame-691@3x.png')] bg-cover bg-no-repeat bg-[top] ${className}`}
+			className={`self-stretch h-[33rem] rounded-2xl overflow-hidden shrink-0 flex flex-col items-end justify-between bg-[url('/frame-691@3x.png')] bg-cover bg-no-repeat bg-[top] ${className}`}
 			style={frameSectionStyle}
 		>
 			<Notificationheader
