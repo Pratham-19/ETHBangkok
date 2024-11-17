@@ -42,32 +42,64 @@ export default function PlayableMap() {
 		],
 		[]
 	);
+  const tokens = useMemo<Token[]>(
+    () => [
+      {
+        id: "1",
+        latitude: 13.723399239281363,
+        longitude: 100.5596624914665,
+        symbol: "EME",
+        name: "Emerald",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "2",
+        latitude: 13.723239281363,
+        longitude: 100.55939609285565,
+        symbol: "RUB",
+        name: "Ruby",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "3",
+        latitude: 13.724370340244306,
+        longitude: 100.55871527244722,
+        symbol: "SHIB",
+        name: "Shiba",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "4",
+        latitude: 13.725185750901844,
+        longitude: 100.5596624914665,
+        symbol: "PEN",
+        name: "Pengu",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+    ],
+    []
+  );
 
-	const tokens = useMemo<Token[]>(
-		() => [
-			{
-				id: "1",
-				latitude: 13.723239281363,
-				longitude: 100.55939609285565,
-				symbol: "SHIB",
-				name: "Shiba Inu",
-				logoUrl: "/game-assets/token-pic.png",
-				backgroundColor: "#8A2BE2",
-			},
-		],
-		[]
-	);
+  const crates = useMemo<Crate[]>(
+    () => [
+      {
+        id: "1",
+        latitude: 13.726441,
+        longitude: 100.55939609285565,
+      },
+      {
+        id: "2",
+        latitude: 13.719329060891909,
+        longitude: 100.55925650453594,
+      },
+    ],
+    []
+  );
 
-	const crates = useMemo<Crate[]>(
-		() => [
-			{
-				id: "1",
-				latitude: 13.726441,
-				longitude: 100.55939609285565,
-			},
-		],
-		[]
-	);
 
 	// State management
 	const [currentUser, setCurrentUser] = useState<User>({
