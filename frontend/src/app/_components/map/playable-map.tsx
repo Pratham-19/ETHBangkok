@@ -14,9 +14,35 @@ import ThemeButton from "../common/theme-button";
 import RainbowBorder from "../common/rainbow-border";
 import Image from "next/image";
 import Info from "../common/info";
+import { useAccount } from "wagmi";
+import { useToast } from "@/app/hooks/use-toast";
 
 export default function PlayableMap() {
   // Static data memoization remains the same
+  const users = useMemo<User[]>(
+    () => [
+      {
+        id: "1",
+        latitude: 13.719483,
+        longitude: 100.558878,
+        name: "Alice",
+        avatarUrl: "/ppgorilla@2x.png",
+      },
+      {
+        id: "2",
+        latitude: 13.722651,
+        longitude: 100.555686,
+        name: "Bob",
+        avatarUrl: "/pplion@2x.png",
+      },
+    ],
+    []
+  );
+  // Static data memoization remains the same
+  const { address } = useAccount();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(address);
   const users = useMemo<User[]>(
     () => [
       {
