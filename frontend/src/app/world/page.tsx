@@ -6,7 +6,7 @@ import { verify } from "../actions/verify";
 
 export default function Home() {
   const app_id = (process.env.NEXT_PUBLIC_WLD_APP_ID as `app_${string}`) ?? "";
-  const action = process.env.NEXT_PUBLIC_WLD_ACTION ?? "v";
+  const action = process.env.NEXT_PUBLIC_WLD_ACTION ?? "vote";
 
   if (!app_id) {
     throw new Error("app_id is not set in environment variables!");
