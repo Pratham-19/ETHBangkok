@@ -1,0 +1,46 @@
+{
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        { "name": "_dataAttester", "type": "address", "internalType": "address" },
+        { "name": "_tokenA", "type": "address", "internalType": "address" },
+        { "name": "_tokenB", "type": "address", "internalType": "address" }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "claim",
+      "inputs": [
+        { "name": "token", "type": "address", "internalType": "address" },
+        { "name": "user", "type": "address", "internalType": "address" },
+        { "name": "questId", "type": "uint256", "internalType": "uint256" },
+        { "name": "location", "type": "string", "internalType": "string" }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setDataAttester",
+      "inputs": [{ "name": "_dataAttester", "type": "address", "internalType": "address" }],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setTokenA",
+      "inputs": [{ "name": "_tokenA", "type": "address", "internalType": "address" }],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setTokenB",
+      "inputs": [{ "name": "_tokenB", "type": "address", "internalType": "address" }],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    }
+  ]
+}

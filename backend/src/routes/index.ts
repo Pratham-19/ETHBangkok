@@ -4,6 +4,7 @@ import { getQuestAssets } from '../handler/quest';
 import { encryptData, storeInNillion, decryptData, retrieveFromNillion } from '../handler/store';
 import { walletHandler } from '../handler/cdp-wallet';
 import { verifyEmail } from '../handler/vlayer';
+import { claimQuest } from '../handler/claim-quest';
 
 const router = express.Router();
 
@@ -70,6 +71,6 @@ router.get('/retrieve', async (req, res): Promise<any> => {
 
 router.get('/test', walletHandler);
 
-router.get('/verify', verifyEmail);
+router.post('/claim-quest', claimQuest);
 
 export default router;

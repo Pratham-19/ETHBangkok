@@ -13,6 +13,12 @@ import {
 import { ProviderEnum } from "@dynamic-labs/types";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import {
+  IDKitWidget,
+  ISuccessResult,
+  useIDKit,
+  VerificationLevel,
+} from "@worldcoin/idkit";
 
 interface UserProfile {
   username: string;
@@ -162,6 +168,11 @@ export default function CreateProfilePage() {
       onClick: undefined,
     },
   ];
+  const { setOpen } = useIDKit();
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
 
   return (
     <div className="size-full relative bg-purple-800 overflow-y-auto flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
@@ -211,6 +222,7 @@ export default function CreateProfilePage() {
                   </div>
                 ))}
               </div>
+              <div></div>
               <div className="self-stretch">
                 <ThemeButton
                   btn="large"
