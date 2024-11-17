@@ -1,29 +1,25 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {EmailDomainProver} from "./EmailDomainProver.sol";
-import {CompanyNFT} from "./CompanyNFT.sol";
+import {EmailProver} from "./EmailProver.sol";
 
-import {Proof} from "vlayer-0.1.0/Proof.sol";
-import {Verifier} from "vlayer-0.1.0/Verifier.sol";
+import {Proof} from "dependencies/vlayer-0.1.0-nightly-20241115-70dfc11/src/Proof.sol";
+import {Verifier} from "dependencies/vlayer-0.1.0-nightly-20241115-70dfc11/src/Verifier.sol";
 
 contract EmailDomainVerifier is Verifier {
     address public prover;
-    CompanyNFT public nft;
 
     mapping(bytes32 => address) public emailHashToAddr;
 
-    constructor(address _prover, string memory _nftName, string memory _nftSymbol) {
+    constructor(address _prover) {
         prover = _prover;
-        nft = new CompanyNFT(_nftName, _nftSymbol);
     }
 
     function verify(Proof calldata, bytes32 _emailHash, address _targetWallet)
         public
-        onlyVerified(prover, EmailDomainProver.main.selector)
+        onlyVerified(prover, EmailProver.main.selector)
     {
         require(emailHashToAddr[_emailHash] == address(0), "email taken");
         emailHashToAddr[_emailHash] = _targetWallet;
-        nft.mint(_targetWallet);
     }
 }

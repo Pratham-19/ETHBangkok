@@ -93,17 +93,62 @@ deployDataValidatorHook:
 deployDataAttester: 
 	@forge script script/DeployDataAttester.s.sol:DeployDataAttester $(NETWORK_ARGS)
 
+deployPriceAttester: 
+	@forge script script/DeployPriceAttester.s.sol:DeployPriceAttester $(NETWORK_ARGS)
+
 setSchemaId: 
 	@forge script script/interactions/i_DataAttester.s.sol:SetSchemaId $(NETWORK_ARGS)
+
+setPriceSchemaId: 
+	@forge script script/interactions/i_PriceAttester.s.sol:SetSchemaId $(NETWORK_ARGS)
 
 setSPInstance: 
 	@forge script script/interactions/i_DataAttester.s.sol:SetSPInstance $(NETWORK_ARGS)
 
+setPriceSPInstance: 
+	@forge script script/interactions/i_PriceAttester.s.sol:SetSPInstance $(NETWORK_ARGS)
+
 testAttest:
 	@forge script script/interactions/i_DataAttester.s.sol:TestAttest $(NETWORK_ARGS)
+
+testPriceAttest:
+	@forge script script/interactions/i_PriceAttester.s.sol:TestAttest $(NETWORK_ARGS)
 
 deployRandomNumber:
 	@forge script script/DeployRandomNumber.s.sol:DeployRandomNumber $(NETWORK_ARGS)
 
 getRandomNumber:
 	@forge script script/interactions/i_RandomNumber.s.sol:GetRandomNumber $(NETWORK_ARGS)
+
+deployEmailProver:
+	@forge script script/DeployEmailProver.s.sol:DeployEmailProver $(NETWORK_ARGS)
+
+deployTokenA:
+	@forge script script/DeployTokenA.s.sol:DeployTokenA $(NETWORK_ARGS)
+
+deployTokenB:
+	@forge script script/DeployTokenB.s.sol:DeployTokenB $(NETWORK_ARGS)
+
+deployTokenC:
+	@forge script script/DeployTokenC.s.sol:DeployTokenC $(NETWORK_ARGS)
+
+deployTokenD:
+	@forge script script/DeployTokenD.s.sol:DeployTokenD $(NETWORK_ARGS)
+
+deployVault:
+	@forge script script/DeployVault.s.sol:DeployVault $(NETWORK_ARGS)
+	
+deployMarketplace: 
+	@forge script script/DeployMarketplace.s.sol:DeployMarketplace $(NETWORK_ARGS)
+
+deployClaim:
+	@forge script script/DeployClaim.s.sol:DeployClaim $(NETWORK_ARGS)
+
+deployPriceFeed:
+	@forge script script/DeployPriceFeed.s.sol:DeployPriceFeed $(NETWORK_ARGS)
+
+deployPriceValidatorHook: 
+	@forge script script/DeployPriceValidatorHook.s.sol:DeployPriceValidatorHook $(NETWORK_ARGS)
+
+deployPriceFeedThresholdProof:
+	@forge script script/DeployPriceThresholdProof.s.sol:DeployPriceThresholdProof $(NETWORK_ARGS)

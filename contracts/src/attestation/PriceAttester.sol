@@ -6,7 +6,7 @@ import {ISP} from "node_modules/@ethsign/sign-protocol-evm/src/interfaces/ISP.so
 import {Attestation} from "node_modules/@ethsign/sign-protocol-evm/src/models/Attestation.sol";
 import {DataLocation} from "node_modules/@ethsign/sign-protocol-evm/src/models/DataLocation.sol";
 
-contract DataAttester is Ownable {
+contract PriceAttester is Ownable {
     ISP public spInstance;
     uint64 public schemaId;
 
@@ -20,10 +20,7 @@ contract DataAttester is Ownable {
         schemaId = schemaId_;
     }
 
-    function attest(address recipient, address user, uint256 questId, string calldata location)
-        external
-        returns (uint64)
-    {
+    function attest(address recipient, bool result, uint256 timestamp) external returns (uint64) {
         bytes[] memory recipients = new bytes[](1);
         recipients[0] = abi.encode(recipient);
         Attestation memory a = Attestation({
@@ -36,7 +33,7 @@ contract DataAttester is Ownable {
             dataLocation: DataLocation.ONCHAIN,
             revoked: false,
             recipients: recipients,
-            data: abi.encode(user, questId, location)
+            data: abi.encode(result, timestamp)
         });
         return spInstance.attest(a, "", "", "");
     }

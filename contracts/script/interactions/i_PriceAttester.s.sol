@@ -4,12 +4,12 @@ pragma solidity 0.8.28;
 import {Script} from "forge-std/Script.sol";
 
 import {HelperConfig} from "../HelperConfig.s.sol";
-import {DataAttester} from "../../src/attestation/DataAttester.sol";
+import {PriceAttester} from "../../src/attestation/PriceAttester.sol";
 
 contract SetSchemaId is Script {
     function setSchemaId(uint64 schemaId_, address dataAttester_) public {
         vm.startBroadcast();
-        DataAttester dataAttester = DataAttester(dataAttester_);
+        PriceAttester dataAttester = PriceAttester(dataAttester_);
 
         dataAttester.setSchemaID(schemaId_);
 
@@ -18,8 +18,8 @@ contract SetSchemaId is Script {
 
     function setSchemaIdUsingConfigs() public {
         HelperConfig helperConfig = new HelperConfig();
-        address dataAttester = helperConfig.getDataAttester(block.chainid);
-        uint64 schemaId = 0x4e0;
+        address dataAttester = helperConfig.getPriceAttester(block.chainid);
+        uint64 schemaId = 0x4e8;
         setSchemaId(schemaId, dataAttester);
     }
 
@@ -31,7 +31,7 @@ contract SetSchemaId is Script {
 contract SetSPInstance is Script {
     function setSPInstance(address ispInstance_, address dataAttester_) public {
         vm.startBroadcast();
-        DataAttester dataAttester = DataAttester(dataAttester_);
+        PriceAttester dataAttester = PriceAttester(dataAttester_);
 
         dataAttester.setSPInstance(ispInstance_);
 
@@ -41,7 +41,7 @@ contract SetSPInstance is Script {
     function setSPInstanceUsingConfigs() public {
         HelperConfig helperConfig = new HelperConfig();
         address spInstance = helperConfig.getSPInstance(block.chainid);
-        address dataAttester = helperConfig.getDataAttester(block.chainid);
+        address dataAttester = helperConfig.getPriceAttester(block.chainid);
 
         setSPInstance(spInstance, dataAttester);
     }
@@ -52,27 +52,23 @@ contract SetSPInstance is Script {
 }
 
 contract TestAttest is Script {
-    function attest(address dataAttester_, address recipient_, address user_, uint256 questId_, string memory location_)
-        public
-    {
+    function attest(address dataAttester_, bool result_, uint256 timestamp_) public {
         vm.startBroadcast();
-        DataAttester dataAttester = DataAttester(dataAttester_);
+        PriceAttester dataAttester = PriceAttester(dataAttester_);
 
-        dataAttester.attest(recipient_, user_, questId_, location_);
+        dataAttester.attest(msg.sender, result_, timestamp_);
 
         vm.stopBroadcast();
     }
 
     function attestUsingConfigs() public {
         HelperConfig helperConfig = new HelperConfig();
-        address dataAttester = helperConfig.getDataAttester(block.chainid);
+        address dataAttester = helperConfig.getPriceAttester(block.chainid);
 
-        address recipient = msg.sender;
-        address user = msg.sender;
-        uint256 questId = 3;
-        string memory location = "a2b6f690-b619-45b0-8aaf-1cc06a43331d";
+        bool result = true;
+        uint256 timestamp = block.timestamp;
 
-        attest(dataAttester, recipient, user, questId, location);
+        attest(dataAttester, result, timestamp);
     }
 
     function run() public {

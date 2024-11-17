@@ -61,8 +61,56 @@ contract HelperConfig is Script {
         return dataValidatorHook;
     }
 
+    function getPriceAttester(uint256 chainId_) public view returns (address) {
+        address priceAttester = DevOpsTools.get_most_recent_deployment("PriceAttester", chainId_);
+
+        return priceAttester;
+    }
+
+    function getPriceValidatorHook(uint256 chainId_) public view returns (address) {
+        address priceValidatorHook = DevOpsTools.get_most_recent_deployment("PriceValidatorHook", chainId_);
+
+        return priceValidatorHook;
+    }
+
     function getRandomNumberContract(uint256 chainId_) public view returns (address) {
         address dataValidatorHook = DevOpsTools.get_most_recent_deployment("RandomNumber", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getTokenA(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("TokenA", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getTokenB(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("TokenB", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getTokenC(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("TokenC", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getTokenD(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("TokenD", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getVault(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("Vault", chainId_);
+
+        return dataValidatorHook;
+    }
+
+    function getPriceFeed(uint256 chainId_) public view returns (address) {
+        address dataValidatorHook = DevOpsTools.get_most_recent_deployment("PriceFeed", chainId_);
 
         return dataValidatorHook;
     }
