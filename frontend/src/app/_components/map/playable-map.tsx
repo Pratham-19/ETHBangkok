@@ -14,9 +14,15 @@ import ThemeButton from "../common/theme-button";
 import RainbowBorder from "../common/rainbow-border";
 import Image from "next/image";
 import Info from "../common/info";
+import { useAccount } from "wagmi";
+import { useToast } from "@/app/hooks/use-toast";
 
 export default function PlayableMap() {
 	// Static data memoization remains the same
+	const { address } = useAccount();
+	const { toast } = useToast();
+	const [isLoading, setIsLoading] = useState(false);
+	console.log(address);
 	const users = useMemo<User[]>(
 		() => [
 			{
@@ -131,6 +137,69 @@ export default function PlayableMap() {
 		[tokens, crates, users, currentUser, handleTokenClick, handleUserClick]
 	);
 
+	const handleClaim = async () => {
+		setIsLoading(true);
+		try {
+			const response = await fetch(
+				"https://a7e5dxwo2iug4evxl3wgbf3ehu.srv.us/claim-quest",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						questId: "12",
+						walletAddress: address,
+						location: {
+							longitude: currentUser.longitude,
+							latitude: currentUser.latitude,
+						},
+						userSeed: "user_123",
+						secretName: "test2",
+					}),
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			if (data.success) {
+				toast({
+					title: "Quest Claimed Successfully! 🎉",
+					description: (
+						<div className="mt-2">
+							<p>Transaction Hash:</p>
+							<a
+								href={data.data.transactionHash}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-blue-500 hover:text-blue-600 underline break-all"
+							>
+								{data.data.transactionHash.split("/").pop()}
+							</a>
+						</div>
+					),
+					duration: 5000,
+				});
+
+				handleModalClose();
+			}
+		} catch (error) {
+			console.error("Error claiming quest:", error);
+			toast({
+				variant: "destructive",
+				title: "Error Claiming Quest",
+				description:
+					"Something went wrong while claiming your quest. Please try again.",
+			});
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	return (
 		<>
 			<main className="flex flex-col items-center justify-center h-screen">
@@ -213,21 +282,34 @@ export default function PlayableMap() {
 											</div>
 										</div>
 										<div className="self-stretch flex flex-row items-center justify-end flex-wrap content-center gap-[1rem]">
-											<ThemeButton
-												btn="large"
-												text="VR watch"
-												defaultFlex="1"
-												defaultHeight="2.5rem"
-												defaultPadding="0.5rem 1rem"
-												defaultGap="0.125rem"
-												tablerIconBrandX="/tablericoncamera.svg"
-												tablerIconBrandXHeight="1.5rem"
-												tablerIconBrandXWidth="1.5rem"
-												brandLabelHeight="unset"
-												brandLabelDisplay="unset"
-												brandLabelFontSize="1rem"
-												brandLabelWidth="unset"
-											/>
+											<div
+												onClick={
+													isLoading
+														? undefined
+														: handleClaim
+												}
+											>
+												<ThemeButton
+													btn="large"
+													text={
+														isLoading
+															? "Claiming..."
+															: "Claim"
+													}
+													defaultFlex="1"
+													defaultHeight="2.5rem"
+													defaultPadding="0.5rem 1rem"
+													defaultGap="0.125rem"
+													tablerIconBrandX="/vector.svg"
+													tablerIconBrandXHeight="1.5rem"
+													tablerIconBrandXWidth="1.5rem"
+													brandLabelHeight="unset"
+													brandLabelDisplay="unset"
+													brandLabelFontSize="1rem"
+													brandLabelWidth="unset"
+												/>
+											</div>
+
 											<ThemeButton
 												btn="large"
 												text="Go to Task"
