@@ -19,26 +19,6 @@ import { useToast } from "@/app/hooks/use-toast";
 
 export default function PlayableMap() {
   // Static data memoization remains the same
-  const users = useMemo<User[]>(
-    () => [
-      {
-        id: "1",
-        latitude: 13.719483,
-        longitude: 100.558878,
-        name: "Alice",
-        avatarUrl: "/ppgorilla@2x.png",
-      },
-      {
-        id: "2",
-        latitude: 13.722651,
-        longitude: 100.555686,
-        name: "Bob",
-        avatarUrl: "/pplion@2x.png",
-      },
-    ],
-    []
-  );
-  // Static data memoization remains the same
   const { address } = useAccount();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -95,42 +75,6 @@ export default function PlayableMap() {
         id: "4",
         latitude: 13.725185750901844,
         longitude: 100.5596624914665,
-        symbol: "PEN",
-        name: "Pengu",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "5",
-        latitude: 13.728596462864544,
-        longitude: 100.56126670433719,
-        symbol: "PEN",
-        name: "Pengu",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "6",
-        latitude: 13.725185750901844,
-        longitude: 100.56126670433719,
-        symbol: "PEN",
-        name: "Pengu",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "7",
-        latitude: 13.735994955758812,
-        longitude: 100.55854395818949,
-        symbol: "PEN",
-        name: "Pengu",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "8",
-        latitude: 13.725185750901844,
-        longitude: 100.5521787779748,
         symbol: "PEN",
         name: "Pengu",
         logoUrl: "/game-assets/token-pic.png",
@@ -235,6 +179,69 @@ export default function PlayableMap() {
     [tokens, crates, users, currentUser, handleTokenClick, handleUserClick]
   );
 
+  const handleClaim = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        "https://a7e5dxwo2iug4evxl3wgbf3ehu.srv.us/claim-quest",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            questId: "12",
+            walletAddress: address,
+            location: {
+              longitude: currentUser.longitude,
+              latitude: currentUser.latitude,
+            },
+            userSeed: "user_123",
+            secretName: "test2",
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast({
+          title: "Quest Claimed Successfully! 🎉",
+          description: (
+            <div className="mt-2">
+              <p>Transaction Hash:</p>
+              <a
+                href={data.data.transactionHash}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-600 underline break-all"
+              >
+                {data.data.transactionHash.split("/").pop()}
+              </a>
+            </div>
+          ),
+          duration: 5000,
+        });
+
+        handleModalClose();
+      }
+    } catch (error) {
+      console.error("Error claiming quest:", error);
+      toast({
+        variant: "destructive",
+        title: "Error Claiming Quest",
+        description:
+          "Something went wrong while claiming your quest. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <main className="flex flex-col items-center justify-center h-screen">
@@ -298,9 +305,9 @@ export default function PlayableMap() {
                         tokenType="meme"
                         timeAgo="h"
                         description={[
-                          "📧 Share your Gmail to confirm your eligibility for the airdrop",
-                          "🎯 Must have a verified Coldplay concert attendance record",
-                          "🔄 Claimable when ETH reaches $3,500",
+                          "📧 Link your Gmail - it's how we know it's really you!",
+                          "🎯 Get your first 5 transactions under your belt",
+                          "🔄 Try out a token swap - it's easier than you think!",
                         ]}
                         rewardAmount="1000"
                         rewardSymbol="$TKN1"
@@ -313,21 +320,24 @@ export default function PlayableMap() {
                       </div>
                     </div>
                     <div className="self-stretch flex flex-row items-center justify-end flex-wrap content-center gap-[1rem]">
-                      <ThemeButton
-                        btn="large"
-                        text="VR watch"
-                        defaultFlex="1"
-                        defaultHeight="2.5rem"
-                        defaultPadding="0.5rem 1rem"
-                        defaultGap="0.125rem"
-                        tablerIconBrandX="/tablericoncamera.svg"
-                        tablerIconBrandXHeight="1.5rem"
-                        tablerIconBrandXWidth="1.5rem"
-                        brandLabelHeight="unset"
-                        brandLabelDisplay="unset"
-                        brandLabelFontSize="1rem"
-                        brandLabelWidth="unset"
-                      />
+                      <div onClick={isLoading ? undefined : handleClaim}>
+                        <ThemeButton
+                          btn="large"
+                          text={isLoading ? "Claiming..." : "Claim"}
+                          defaultFlex="1"
+                          defaultHeight="2.5rem"
+                          defaultPadding="0.5rem 1rem"
+                          defaultGap="0.125rem"
+                          tablerIconBrandX="/vector.svg"
+                          tablerIconBrandXHeight="1.5rem"
+                          tablerIconBrandXWidth="1.5rem"
+                          brandLabelHeight="unset"
+                          brandLabelDisplay="unset"
+                          brandLabelFontSize="1rem"
+                          brandLabelWidth="unset"
+                        />
+                      </div>
+
                       <ThemeButton
                         btn="large"
                         text="Go to Task"
