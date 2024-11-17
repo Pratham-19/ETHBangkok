@@ -12,6 +12,13 @@ import {
 } from "@dynamic-labs/sdk-react-core";
 import { ProviderEnum } from "@dynamic-labs/types";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import {
+  IDKitWidget,
+  ISuccessResult,
+  useIDKit,
+  VerificationLevel,
+} from "@worldcoin/idkit";
 
 interface UserProfile {
   username: string;
@@ -148,7 +155,7 @@ export default function CreateProfilePage() {
         ? "Verified  World ID"
         : "VerifyWorld ID",
       icon: "/worldcoinlogo-1.svg",
-      onClick: undefined,
+      onClick: () => signIn(),
     },
     {
       text: "Connect Google",
@@ -161,6 +168,11 @@ export default function CreateProfilePage() {
       onClick: undefined,
     },
   ];
+  const { setOpen } = useIDKit();
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
 
   return (
     <div className="size-full relative bg-purple-800 overflow-y-auto flex flex-col items-center justify-start p-[1rem] box-border gap-[2rem] leading-[normal] tracking-[normal]">
@@ -210,6 +222,7 @@ export default function CreateProfilePage() {
                   </div>
                 ))}
               </div>
+              <div></div>
               <div className="self-stretch">
                 <ThemeButton
                   btn="large"
@@ -222,7 +235,7 @@ export default function CreateProfilePage() {
             <div className="z-50 flex justify-center px-4">
               <div className="w-full max-w-md">
                 <div className="self-stretch flex flex-row items-start justify-center gap-[1rem] max-w-full">
-                  <div className="flex-1 relative inline-block min-w-[12.125rem] max-w-full box-border pl-[1.25rem] pr-[1.25rem]">
+                  <div className="flex-1 relative inline-block min-w-[12.125rem] max-w-full box-border">
                     Save profile and continue without connecting accounts.
                   </div>
                   <div onClick={handleSkip}>

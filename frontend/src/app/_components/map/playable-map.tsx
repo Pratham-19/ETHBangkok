@@ -36,15 +36,77 @@ export default function PlayableMap() {
     ],
     []
   );
-
   const tokens = useMemo<Token[]>(
     () => [
       {
         id: "1",
+        latitude: 13.723399239281363,
+        longitude: 100.5596624914665,
+        symbol: "EME",
+        name: "Emerald",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "2",
         latitude: 13.723239281363,
         longitude: 100.55939609285565,
+        symbol: "RUB",
+        name: "Ruby",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "3",
+        latitude: 13.724370340244306,
+        longitude: 100.55871527244722,
         symbol: "SHIB",
-        name: "Shiba Inu",
+        name: "Shiba",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "4",
+        latitude: 13.725185750901844,
+        longitude: 100.5596624914665,
+        symbol: "PEN",
+        name: "Pengu",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "5",
+        latitude: 13.728596462864544,
+        longitude: 100.56126670433719,
+        symbol: "PEN",
+        name: "Pengu",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "6",
+        latitude: 13.725185750901844,
+        longitude: 100.56126670433719,
+        symbol: "PEN",
+        name: "Pengu",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "7",
+        latitude: 13.735994955758812,
+        longitude: 100.55854395818949,
+        symbol: "PEN",
+        name: "Pengu",
+        logoUrl: "/game-assets/token-pic.png",
+        backgroundColor: "#8A2BE2",
+      },
+      {
+        id: "8",
+        latitude: 13.725185750901844,
+        longitude: 100.5521787779748,
+        symbol: "PEN",
+        name: "Pengu",
         logoUrl: "/game-assets/token-pic.png",
         backgroundColor: "#8A2BE2",
       },
@@ -58,6 +120,22 @@ export default function PlayableMap() {
         id: "1",
         latitude: 13.726441,
         longitude: 100.55939609285565,
+      },
+      {
+        id: "2",
+        latitude: 13.719329060891909,
+        longitude: 100.55925650453594,
+      },
+      {
+        id: "3",
+        latitude: 13.732957904317544,
+        longitude: 100.55375898660088,
+      },
+
+      {
+        id: "4",
+        latitude: 13.725272324476776,
+        longitude: 100.5544596285639,
       },
     ],
     []
@@ -193,7 +271,11 @@ export default function PlayableMap() {
                         tokenName="TokenName"
                         tokenType="meme"
                         timeAgo="h"
-                        description="CityMapper DePIN is a decentralized physical infrastructure network designed to collaboratively map cities using blockchain technology. By harnessing the power of community contributors equipped with IoT devices, drones, and smartphones, the project aims to create real-time, detailed urban maps that include streets, buildings, traffic patterns, and environmental data. Participants are rewarded with tokens for contributing accurate data, supporting applications in navigation, urban planning, and smart city initiatives, all while ensuring transparency and community-driven governance."
+                        description={[
+                          "📧 Link your Gmail - it's how we know it's really you!",
+                          "🎯 Get your first 5 transactions under your belt",
+                          "🔄 Try out a token swap - it's easier than you think!",
+                        ]}
                         rewardAmount="1000"
                         rewardSymbol="$TKN1"
                         className="custom-class py-4"

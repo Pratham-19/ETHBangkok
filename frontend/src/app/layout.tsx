@@ -3,8 +3,8 @@ import "./globals.css";
 import DynamicProvider from "@/wrappers/dynamic-provider";
 
 export const metadata: Metadata = {
-  title: "0xCity",
-  description: "0xCity",
+  title: "Token Trek",
+  description: "Token Trek",
 };
 
 export default function RootLayout({

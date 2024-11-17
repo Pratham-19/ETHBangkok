@@ -35,7 +35,7 @@ export default function ImageUpload({ onImageUpload }: ImageUploadProps) {
       />
       
       <div 
-        className="w-full h-full rounded-481xl overflow-hidden"
+        className="w-full h-full rounded-481xl overflow-hidden opacity-80"
         style={{
           backgroundImage: `url(${previewImage})`,
           backgroundSize: 'cover',

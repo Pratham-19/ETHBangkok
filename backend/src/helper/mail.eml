@@ -1,0 +1,522 @@
+Delivered-To: prathamcancode@gmail.com
+Received: by 2002:a05:7300:bf10:b0:148:e002:cbae with SMTP id ff16csp1527830dyb;
+        Sat, 16 Nov 2024 00:26:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE2T+ZfTW8pE7WQHN0MScpeabugsiRy+cAVjgQAEgY84Vg06Aqy7FJJ6AbwkwGICp4HSxdi
+X-Received: by 2002:a05:6a00:3a14:b0:71e:755c:6dad with SMTP id d2e1a72fcca58-72476b72566mr7059524b3a.5.1731745617708;
+        Sat, 16 Nov 2024 00:26:57 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1731745617; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Ts1h2FMx9a2jmQZCC8iQIAbhZndv7PrBYa4XSn97WzFPqaDmCOesPT5gzC5ZKGb6Uw
+         78Akno03SBeRD1NTYHDnw6kudn60bJX4rCLH6/iJiV/NrcgRiCL6Lw6WOAaJV60ERdW3
+         7XrXPkNrffuou1LHgjrxSIcSjzME4XSN3sBuzjzUG4XxcWohDVCmRq4IEQvo8sRw0G0Z
+         pLpAahb9es+AcQi7X5yH2HbNlgQjMtEZVGQZdlpeOlzpDCTZFbfATWjXgH7Kseg4az0H
+         AZAJInMdwMwrWbrafY4RALV1wIFLeg0xgguwlLS2+Sy7aBXK9UjOsz8gMX3LhmfqHv3s
+         E1OQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=feedback-id:mime-version:date:message-id:subject:reply-to:to:from
+         :dkim-signature:dkim-signature;
+        bh=+/WE/uKVnygKQijHRSmqNxx2dCm/MKd+d1lFEj/ks0g=;
+        fh=tJYC3ONPaUrrXhtvBG7dpaCzlIJmeG2ZRAMHTXLbpXE=;
+        b=MBKZMdwXQoQrvGFmWZ9Wkrvd4iUU4xa4oJ38UUWEQvUPn+E+9EsD1PbnXMbBjim84K
+         kGQNtylKQJt3iiTlb8LvPbosto7xW/NkXbp9GEvvrYtnCrFOgU4ZTYi14xDQ1L3zPHkJ
+         bzFWKKUnt/T/XEOaLjOegsBU1ED6L0PpgoOIgesOaxrkusjsSaxhbbyn6x0tQCP6hOsp
+         lZVzR3ggWjIr4SWqNj4PTI73f+kR8B5HPGCmq3GTSUHwuM46VqN193VAX2LUfhlrAX5D
+         NaH9fMNv+Dr00FOKd8UJWk0Yp0VC8Yd7zjiuQpVwx+7haasHXWY7Tnsclk+X11KH/VtR
+         a2dQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@calendar.luma-mail.com header.s=v4fqhov2yrwyoj7wdmpq5asew6qylfdt header.b=PDWm9+S7;
+       dkim=pass header.i=@amazonses.com header.s=7v7vs6w47njt4pimodk5mmttbegzsi6n header.b="koGZY/6T";
+       spf=pass (google.com: domain of 010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com designates 54.240.116.24 as permitted sender) smtp.mailfrom=010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=calendar.luma-mail.com
+Return-Path: <010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com>
+Received: from a116-24.smtp-out.us-west-2.amazonses.com (a116-24.smtp-out.us-west-2.amazonses.com. [54.240.116.24])
+        by mx.google.com with ESMTPS id d2e1a72fcca58-7247712c9a9si3913816b3a.117.2024.11.16.00.26.57
+        for <prathamcancode@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 16 Nov 2024 00:26:57 -0800 (PST)
+Received-SPF: pass (google.com: domain of 010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com designates 54.240.116.24 as permitted sender) client-ip=54.240.116.24;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@calendar.luma-mail.com header.s=v4fqhov2yrwyoj7wdmpq5asew6qylfdt header.b=PDWm9+S7;
+       dkim=pass header.i=@amazonses.com header.s=7v7vs6w47njt4pimodk5mmttbegzsi6n header.b="koGZY/6T";
+       spf=pass (google.com: domain of 010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com designates 54.240.116.24 as permitted sender) smtp.mailfrom=010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=calendar.luma-mail.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=v4fqhov2yrwyoj7wdmpq5asew6qylfdt; d=calendar.luma-mail.com;
+	t=1731745617;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type;
+	bh=UwOXEUSnCU4HukOZh+B0040R2dzRlA5ViK/PMa8JwT4=;
+	b=PDWm9+S7XmLJYb+pMswY2NIVSahXeV9J+E//j5Vw2EPaBQW9KNy0HSnqlFVJo0l/
+	4sUHC5OovQ+W1wJr2l8CDqaCG1V085jFZLYtPJTBhbBI+ST/nLTCU8nEowLH1FTZ2LP
+	2ilUJUywEJ6VZ0DcM75q/YqvUfaA/XpYzIL5sqh01k8Xi1Wm3Qx0vb2ShXWLbhfetuZ
+	yunG7DIOyGTkV2sCdg3lqlZ2cqTtEMSOb7RySWModrYOTy8v6GSkHPt0VmC6H3WpYFp
+	Uzgo+6JTUzl12oDlW95sKuIrdHLg4aD1DhVUB4cdrVcenqlKaKily7d3p8YxlgsGvmT
+	F8PEvvzIAg==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=7v7vs6w47njt4pimodk5mmttbegzsi6n; d=amazonses.com; t=1731745617;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=UwOXEUSnCU4HukOZh+B0040R2dzRlA5ViK/PMa8JwT4=;
+	b=koGZY/6TnJG7oQAQJ7un7T4x5G02NCWwk7vqMlfKcv9+y3qj7PgEL2vhXRln40iw
+	Wj74VIpE1rOU6rkPhWslQfxVWdqttDG77cAVN4o9uCkSTSuKIB8+aJVEhspWpfPNBWj
+	yvoxVnyGabgxo/vamdaP3nYUjSSCWo3Pe0ZiUzSs=
+From: Devcon <devcon7@calendar.luma-mail.com>
+To: prathamcancode@gmail.com
+Reply-To: Devcon <collin@dabl.club>
+Subject: You are invited to Modular Mixer
+Message-ID: <010101933415157e-b3a2e0b4-de1d-4d54-a320-2b522bc59d8e-000000@us-west-2.amazonses.com>
+Date: Sat, 16 Nov 2024 08:26:57 +0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--_NmP-d0d0e1c37b947ce6-Part_1"
+Feedback-ID: ::1.us-west-2.8b35YBY+LtDz6cPPlkX7VvLgReyfk0JzFCEDxPQigUM=:AmazonSES
+X-SES-Outgoing: 2024.11.16-54.240.116.24
+
+----_NmP-d0d0e1c37b947ce6-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+You=E2=80=99re invited to
+Modular Mixer
+
+Saturday, November 16 8:00 PM - =
+11:00 PM GMT+7
+Location: In Person
+
+Feeling Modular? You are invited for an=
+ exclusive gathering crafted for friends of Polygon and hosted by Rome =
+Protocol. There will be cocktails and light bites to keep the energy =
+flowing. SPECIAL GUESTS: - Bruno Skvorc - Developer Relations at Polygon - =
+Anil Kumar =E2=80=93 Co-Founder & CEO at Rome Protocol Location: W Hotel =
+Bangkok https://maps.app.goo.gl/Tu86RBPqpKGqvQy56 Schedule: Open Bar 8:00 =
+PM - 11:00 PM Talks at 9:00 PM Cheers, Dabl Club
+
+Accept Invite [https://lu=
+.ma/i/2Dd0wQOluo]
+
+View Event [https://lu.ma/i/2Dd0wQOluo]
+
+Can=E2=80=99t make it? Decline the invite [https://lu.ma/i/2Dd0wQOluo] to =
+stop receiving emails about this event.
+
+
+Sent using https://lu.ma
+----_NmP-d0d0e1c37b947ce6-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><title></title><!--[if mso | IE]><meta http-equiv=3D"X-UA-Compa=
+tible" content=3D"IE=3Dedge"><![endif]--><meta http-equiv=3D"Content-Type" =
+content=3D"text/html; charset=3DUTF-8" /><meta name=3D"viewport" content=3D=
+"width=3Ddevice-width, initial-scale=3D1" /><style type=3D"text/css">
+          #outlook a {
+            padding: 0;
+          }
+
+          body {
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+          }
+
+          table, td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+          }
+
+          img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+          }
+
+          p {
+            display: block;
+            margin: 13px 0;
+          }
+        </style><!--[if mso | IE]>
+            <noscript>
+              <xml>
+                <o:OfficeDocumentSettings>
+                  <o:AllowPNG/>
+                  <o:PixelsPerInch>96</o:PixelsPerInch>
+                </o:OfficeDocumentSettings>
+              </xml>
+            </noscript>
+          <![endif]--><!--[if !mso]><!-->
+            <link href=3D"https://fonts.googleapis.com/css?family=3DRoboto:=
+300,400,500,700" rel=3D"stylesheet" type=3D"text/css" />
+            <style type=3D"text/css">
+              @import url(https://fonts.googleapis.com/css?family=3DRoboto:=
+300,400,500,700);
+            </style>
+          <!--<![endif]--><style type=3D"text/css">
+    h1 {
+      font-size: 24px;
+      line-height: 32px;
+      margin-top: 32px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 20px;
+      line-height: 28px;
+      margin-top: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    p.small {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    hr {
+      border-top: 1px solid #ebeced;
+    }
+
+    blockquote {
+      border-left: 2px solid #ebeced;
+      padding-left: 1rem;
+      margin-left: 0;
+    }
+
+    a {
+      color: #c82463;
+      text-decoration: none !important;
+    }
+
+    .spark-content a, a.cta-link {
+      color: #c82463 !important;
+      text-decoration: none !important;
+    }
+
+    .spark-content li p {
+      margin: 4px 0;
+    }
+
+    .spark-content a.btn {
+      margin-top: 0.5rem;
+      color: white !important;
+    }
+
+    .spark-content pre {
+      /* We need to wrap long lines, otherwise the email will scroll horizo=
+ntally
+         on some clients like Superhuman */
+      white-space: pre-wrap !important;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f4f5f6 !important;
+    }
+
+    table.survey-pill {
+      background-color: #f4f5f6;
+      border-radius: 8px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      width: 20%;
+      min-width: 60px;
+    }
+
+    td.survey-pill-content {
+      text-align: center;
+      padding: 12px 8px;
+    }
+
+    td.survey-pill-content a {
+      padding: 16px 8px;
+    }
+
+    td.survey-pill-content.emoji {
+      font-size: 28px;
+    }
+
+    .calendar-red {
+      color: #d86156;
+    }
+
+    .col-50 {
+      width: 50% !important;
+      max-width: 50%;
+    }
+  </style></head><body style=3D"word-spacing:normal"><div style=3D"display:=
+none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0=
+px;opacity:0;overflow:hidden">Feeling Modular? You are invited for an exclu=
+sive gathering crafted for friends of Polygon and=E2=80=A6</div><!--[if mso=
+ | IE]><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px;" width=3D"600=
+" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exac=
+tly;"><![endif]--><table align=3D"center" border=3D"0" cellPadding=3D"0" ce=
+llSpacing=3D"0" role=3D"presentation" style=3D"width:100% !important;margin=
+:0 auto;max-width:600px"><tbody><tr><td style=3D"direction:ltr;padding:16px=
+;font-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Robot=
+o, Helvetica, sans-serif;font-size:16px;line-height:1.6;text-align:left;col=
+or:#131517"><!--[if mso | IE]><table role=3D"presentation" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0"><tr><td align=3D"left" class=3D"" style=3D=
+"" ><![endif]--><table border=3D"0" style=3D"padding-bottom:4px;display:blo=
+ck;width:100%" cellPadding=3D"0" cellSpacing=3D"0" role=3D"presentation" al=
+ign=3D"left"><tbody><tr><td style=3D"vertical-align:middle"><a target=3D"_b=
+lank" style=3D"display:flex;text-decoration:none" href=3D"https://o.lu.ma/M=
+85u8ng4Rk?cid=3D2p85lkj2w4ng0df"><img height=3D"18" width=3D"18" src=3D"htt=
+ps://images.lumacdn.com/cdn-cgi/image/format=3Dauto,fit=3Dcover,dpr=3D2,bac=
+kground=3Dwhite,quality=3D75,width=3D18,height=3D18/calendars/fb/099c4ff9-e=
+f3e-44b9-9480-4421c6d4b06b" style=3D"width:18px;height:18px;border-radius:4=
+px" /></a></td><td style=3D"vertical-align:middle;padding-left:8px"><a targ=
+et=3D"_blank" style=3D"line-height:1.5 !important;text-decoration:none" hre=
+f=3D"https://o.lu.ma/M85u8ng4Rk?cid=3D2p85lkj2w4ng0df"><div style=3D"font-f=
+amily:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, Helv=
+etica, sans-serif;font-size:16px;color:#737577;font-weight:400;margin-top:0=
+;margin-bottom:0">Devcon</div></a></td></tr></tbody></table><h1 style=3D"ma=
+rgin-top:0;margin-bottom:4px;font-size:24px;line-height:32px"><div style=3D=
+"font-weight:normal;color:#b3b5b7">You=E2=80=99re invited to</div><b>Modula=
+r Mixer</b></h1><table style=3D"width:100%"><tr><td align=3D"center" style=
+=3D"font-size:0;padding:0;padding-top:16px;padding-bottom:16px;word-break:b=
+reak-word"><p style=3D"border-top-width:1px;border-top-style:solid;border-c=
+olor:#ebeced;font-size:1px;margin:0;width:100%"></p></td><!--[if mso | IE]>
+            <table
+              align=3D"center"
+              border=3D"0"
+              cellpadding=3D"0"
+              cellspacing=3D"0"
+              style=3D"
+                border-top: solid 1px #ebeced;
+                font-size: 1px;
+                margin: 0px auto;
+                width: 568px;
+              "
+              role=3D"presentation"
+              width=3D"568px"
+            >
+              <tr>
+                <td style=3D"height: 0; line-height: 0">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          <![endif]--></tr></table><div style=3D"font-family:-apple-system,=
+ BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, Helvetica, sans-serif;fo=
+nt-size:16px;color:#131517;font-weight:400;margin-top:0;margin-bottom:0"><t=
+able><tbody><tr><td style=3D"padding-bottom:8px"><table border=3D"0" style=
+=3D"border-spacing:0"><tbody><tr><td style=3D"vertical-align:middle;width:4=
+0px;height:40px;padding:0"><table width=3D"40" cellSpacing=3D"0" cellPaddin=
+g=3D"0" border=3D"0" style=3D"border-spacing:0;border-collapse:separate"><t=
+body><tr><td style=3D"padding:0;margin:0;background-color:#eceded !importan=
+t;border:1px solid #eceded;font-size:8px !important;line-height:2 !importan=
+t;border-top-right-radius:8px;border-top-left-radius:8px" valign=3D"middle"=
+ align=3D"center"><span style=3D"color:#737577 !important;font-size:8px !im=
+portant;line-height:2 !important;font-weight:500">NOV</span></td></tr><tr><=
+td style=3D"padding:0;margin:0;background-color:#ffffff;border:1px solid #e=
+ceded;border-bottom-right-radius:8px;border-bottom-left-radius:8px;font-siz=
+e:16 !important;line-height:1.5 !important" valign=3D"top" align=3D"center"=
+><span style=3D"font-size:16 !important;line-height:1.5 !important;font-wei=
+ght:500;color:#737577">16</span></td></tr></tbody></table></td><td style=3D=
+"vertical-align:middle;padding-left:12px"><div><div style=3D"font-family:-a=
+pple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, Helvetica, s=
+ans-serif;font-size:16px;color:#131517;font-weight:500;margin-top:0;margin-=
+bottom:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Saturda=
+y, November 16</div><div style=3D"font-family:-apple-system, BlinkMacSystem=
+Font, &#x27;Segoe UI&#x27;, Roboto, Helvetica, sans-serif;font-size:14px;co=
+lor:#737577;font-weight:400;margin-top:0;margin-bottom:0;overflow:hidden;te=
+xt-overflow:ellipsis;white-space:nowrap">8:00 PM - 11:00 PM GMT+7</div></di=
+v></td></tr></tbody></table></td></tr><tr><td><table border=3D"0" style=3D"=
+border-spacing:0"><tbody><tr><td style=3D"vertical-align:middle;width:40px;=
+height:40px;padding:0"><table border=3D"0" style=3D"padding:0;border-collap=
+se:separate;border-spacing:0"><tbody><tr><td style=3D"border:1px solid #ece=
+ded;vertical-align:middle;width:40px;height:40px;border-radius:8px" align=
+=3D"center"><img style=3D"display:block" src=3D"https://cdn.lu.ma/cdn-cgi/i=
+mage/format=3Dauto,fit=3Dcover,dpr=3D2,background=3Dwhite,quality=3D75,widt=
+h=3D40,height=3D40/misc/3k/95610a7f-2391-4002-9779-a1e9bfb7216c" width=3D"2=
+0" height=3D"20" /></td></tr></tbody></table></td><td style=3D"vertical-ali=
+gn:middle;padding-left:12px"><a target=3D"_blank" style=3D"text-decoration:=
+none" href=3D"https://o.lu.ma/xxfPk6EnPN?cid=3D2p85lkj2w4ng0df"><div><div s=
+tyle=3D"font-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;=
+, Roboto, Helvetica, sans-serif;font-size:16px;color:#131517;font-weight:50=
+0;margin-top:0;margin-bottom:0">W Bangkok =E2=86=97</div><div style=3D"font=
+-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, He=
+lvetica, sans-serif;font-size:14px;color:#737577;font-weight:400;margin-top=
+:0;margin-bottom:0">Krung Thep Maha Nakhon</div></div></a></td></tr></tbody=
+></table></td></tr></tbody></table></div><table style=3D"width:100%"><tr><t=
+d align=3D"center" style=3D"font-size:0;padding:0;padding-top:16px;padding-=
+bottom:16px;word-break:break-word"><p style=3D"border-top-width:1px;border-=
+top-style:solid;border-color:#ebeced;font-size:1px;margin:0;width:100%"></p=
+></td><!--[if mso | IE]>
+            <table
+              align=3D"center"
+              border=3D"0"
+              cellpadding=3D"0"
+              cellspacing=3D"0"
+              style=3D"
+                border-top: solid 1px #ebeced;
+                font-size: 1px;
+                margin: 0px auto;
+                width: 568px;
+              "
+              role=3D"presentation"
+              width=3D"568px"
+            >
+              <tr>
+                <td style=3D"height: 0; line-height: 0">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          <![endif]--></tr></table><div style=3D"font-size:16px"><div class=
+=3D"spark-content mirror-content"><p>=E2=80=8B<!-- -->Feeling Modular? You =
+are invited for an exclusive gathering crafted for friends of Polygon and h=
+osted by Rome Protocol. There will be cocktails and light bites to keep the=
+ energy flowing.</p><p>=E2=80=8B<!-- -->=E2=80=8BSPECIAL GUESTS:</p><p>=E2=
+=80=8B<!-- -->- Bruno Skvorc - Developer Relations at Polygon</p><p>=E2=80=
+=8B<!-- -->=E2=80=8B- Anil Kumar =E2=80=93 Co-Founder &amp; CEO at Rome Pro=
+tocol</p><p>=E2=80=8B<!-- -->Location: </p><p>=E2=80=8B<!-- -->W Hotel Bang=
+kok </p><p>=E2=80=8B<a href=3D"https://o.lu.ma/xQJz5hgnhI?cid=3D2p85lkj2w4n=
+g0df" target=3D"_blank" rel=3D"nofollow noopener">https://maps.app.goo.gl/T=
+u86RBPqpKGqvQy56</a></p><p>=E2=80=8B<!-- -->Schedule: </p><p>=E2=80=8B<!-- =
+-->Open Bar 8:00 PM - 11:00 PM</p><p>=E2=80=8B<!-- -->Talks at 9:00 PM </p>=
+<p>=E2=80=8B<!-- -->Cheers,</p><p>=E2=80=8B<!-- -->Dabl Club</p></div></div=
+><div style=3D"font-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe U=
+I&#x27;, Roboto, Helvetica, sans-serif;font-size:16px;color:#131517;font-we=
+ight:400;margin-top:0;margin-bottom:0"><table border=3D"0" cellPadding=3D"0=
+" cellSpacing=3D"0" role=3D"presentation" style=3D"vertical-align:top"><tbo=
+dy><tr><td align=3D"left"><table border=3D"0" cellPadding=3D"0" cellSpacing=
+=3D"0" role=3D"presentation" style=3D"border-collapse:separate;line-height:=
+100%"><tbody><tr><td align=3D"center" bgcolor=3D"#c82463" role=3D"presentat=
+ion" style=3D"border:none;border-radius:8px;cursor:auto;background:#c82463;=
+text-decoration:none;mso-padding-alt:12px 24px" valign=3D"middle"><a href=
+=3D"https://o.lu.ma/rfaBsjpEmw?cid=3D2p85lkj2w4ng0df" style=3D"display:inli=
+ne-block;background-color:#c82463;color:white;font-size:16px;line-height:1;=
+margin:0;text-decoration:none;text-transform:none;border-radius:8px;font-we=
+ight:700;padding:12px 24px;mso-padding-alt:0px" target=3D"_blank">Accept In=
+vite</a></td></tr></tbody></table></td><td align=3D"left" style=3D"padding-=
+left:10px"><table border=3D"0" cellPadding=3D"0" cellSpacing=3D"0" role=3D"=
+presentation" style=3D"border-collapse:separate;line-height:100%"><tbody><t=
+r><td align=3D"center" bgcolor=3D"#f4f5f6" role=3D"presentation" style=3D"b=
+order:none;border-radius:8px;cursor:auto;background:#f4f5f6;text-decoration=
+:none;mso-padding-alt:12px 24px" valign=3D"middle"><a href=3D"https://o.lu.=
+ma/rfaBsjpEmw?cid=3D2p85lkj2w4ng0df" style=3D"display:inline-block;backgrou=
+nd-color:#f4f5f6;color:#737577;font-size:16px;line-height:1;margin:0;text-d=
+ecoration:none;text-transform:none;border-radius:8px;font-weight:500;paddin=
+g:12px 24px;mso-padding-alt:0px" target=3D"_blank">View Event</a></td></tr>=
+</tbody></table></td></tr></tbody></table></div><div style=3D"font-family:-=
+apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, Helvetica, =
+sans-serif;font-size:14px;color:#737577;font-weight:400;margin-top:0;margin=
+-bottom:0;padding-top:24px">Can=E2=80=99t make it? <a class=3D"cta-link" hr=
+ef=3D"https://o.lu.ma/rfaBsjpEmw?cid=3D2p85lkj2w4ng0df">Decline the invite<=
+/a> to stop receiving emails about this event.</div><table border=3D"0" cel=
+lPadding=3D"0" cellSpacing=3D"0" role=3D"presentation" width=3D"100%"><tbod=
+y><tr><td align=3D"left"><div style=3D"font-family:-apple-system, BlinkMacS=
+ystemFont, &#x27;Segoe UI&#x27;, Roboto, Helvetica, sans-serif;font-size:12=
+px;color:#737577;font-weight:500;margin-top:0;margin-bottom:0;padding-top:3=
+2px">Share with friends</div><table><tbody><tr><td align=3D"left" style=3D"=
+font-size:0;padding:0;padding-top:8px;padding-bottom:8px;word-break:break-w=
+ord"><!--[if mso | IE]><table align=3D"left" border=3D"0" cellpadding=3D"0"=
+ cellspacing=3D"0" role=3D"presentation" ><tr><td><![endif]--><table align=
+=3D"left" border=3D"0" cellPadding=3D"0" cellSpacing=3D"0" role=3D"presenta=
+tion" style=3D"float:none;display:inline-table"><tbody><tr><td style=3D"pad=
+ding:0;vertical-align:middle;padding-right:24px"><a href=3D"https://o.lu.ma=
+/UFUH9sL0Jg?cid=3D2p85lkj2w4ng0df" target=3D"_blank"><img height=3D"20" src=
+=3D"https://cdn.lu.ma/email/facebook.png" style=3D"border-radius:3px;displa=
+y:block" width=3D"20" /></a></td></tr></tbody></table><!--[if mso | IE]></t=
+d><td><![endif]--><table align=3D"left" border=3D"0" cellPadding=3D"0" cell=
+Spacing=3D"0" role=3D"presentation" style=3D"float:none;display:inline-tabl=
+e"><tbody><tr><td style=3D"padding:0;vertical-align:middle;padding-right:24=
+px"><a href=3D"https://o.lu.ma/MUTnojNAlD?cid=3D2p85lkj2w4ng0df" target=3D"=
+_blank"><img height=3D"20" src=3D"https://cdn.lu.ma/email/twitter.png" styl=
+e=3D"border-radius:3px;display:block" width=3D"20" /></a></td></tr></tbody>=
+</table><!--[if mso | IE]></td><td><![endif]--><table align=3D"left" border=
+=3D"0" cellPadding=3D"0" cellSpacing=3D"0" role=3D"presentation" style=3D"f=
+loat:none;display:inline-table"><tbody><tr><td style=3D"padding:0;vertical-=
+align:middle;padding-right:24px"><a href=3D"https://o.lu.ma/qRAc0AraRu?cid=
+=3D2p85lkj2w4ng0df" target=3D"_blank"><img height=3D"20" src=3D"https://cdn=
+.lu.ma/email/linkedin.png" style=3D"border-radius:3px;display:block" width=
+=3D"20" /></a></td></tr></tbody></table><!--[if mso | IE]></td><td><![endif=
+]--><table align=3D"left" border=3D"0" cellPadding=3D"0" cellSpacing=3D"0" =
+role=3D"presentation" style=3D"float:none;display:inline-table"><tbody><tr>=
+<td style=3D"padding:0;vertical-align:middle;padding-right:24px"><a href=3D=
+"https://o.lu.ma/KUCvte2ChI?cid=3D2p85lkj2w4ng0df" target=3D"_blank"><img h=
+eight=3D"20" src=3D"https://cdn.lu.ma/email/whatsapp.png" style=3D"border-r=
+adius:3px;display:block" width=3D"20" /></a></td></tr></tbody></table><!--[=
+if mso | IE]></td><td><![endif]--><table align=3D"left" border=3D"0" cellPa=
+dding=3D"0" cellSpacing=3D"0" role=3D"presentation" style=3D"float:none;dis=
+play:inline-table"><tbody><tr><td style=3D"padding:0;vertical-align:middle;=
+padding-right:0"><a href=3D"https://o.lu.ma/2OHfaw9yCU?cid=3D2p85lkj2w4ng0d=
+f" target=3D"_blank"><img height=3D"20" src=3D"https://cdn.lu.ma/email/mess=
+enger.png" style=3D"border-radius:3px;display:block" width=3D"20" /></a></t=
+d></tr></tbody></table><!--[if mso | IE]></td></tr></table><![endif]--></td=
+></tr></tbody></table></td></tr></tbody></table><table style=3D"width:100%"=
+><tr><td align=3D"center" style=3D"font-size:0;padding:0;padding-top:32px;w=
+ord-break:break-word"><p style=3D"border-top-width:1px;border-top-style:sol=
+id;border-color:#ebeced;font-size:1px;margin:0;width:100%"></p></td><!--[if=
+ mso | IE]>
+            <table
+              align=3D"center"
+              border=3D"0"
+              cellpadding=3D"0"
+              cellspacing=3D"0"
+              style=3D"
+                border-top: solid 1px #ebeced;
+                font-size: 1px;
+                margin: 0px auto;
+                width: 568px;
+              "
+              role=3D"presentation"
+              width=3D"568px"
+            >
+              <tr>
+                <td style=3D"height: 0; line-height: 0">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          <![endif]--></tr></table><!--[if mso | IE]></td></tr></table><![e=
+ndif]--></td></tr></tbody></table><!--[if mso | IE]></td></tr></table><![en=
+dif]--><!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" class=3D"" role=3D"presentation" style=3D"width:60=
+0px;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-lin=
+e-height-rule:exactly;"><![endif]--><table align=3D"center" border=3D"0" ce=
+llPadding=3D"0" cellSpacing=3D"0" role=3D"presentation" style=3D"width:100%=
+ !important;margin:0 auto;max-width:600px"><tbody><tr><td style=3D"directio=
+n:ltr;padding:16px 16px 0 16px;font-family:-apple-system, BlinkMacSystemFon=
+t, &#x27;Segoe UI&#x27;, Roboto, Helvetica, sans-serif;font-size:16px;line-=
+height:1.6;text-align:left;color:#131517"><!--[if mso | IE]><table role=3D"=
+presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tr><td alig=
+n=3D"left" class=3D"" style=3D"" ><![endif]--><table width=3D"100%" cellSpa=
+cing=3D"0" cellPadding=3D"0" border=3D"0" style=3D"vertical-align:top;width=
+:100% !important"><tbody><tr><td width=3D"50%" align=3D"left" valign=3D"top=
+" style=3D"width:50% !important"><a href=3D"https://o.lu.ma/UhHAXJS0Sr?cid=
+=3D2p85lkj2w4ng0df"><img height=3D"15" width=3D"45" src=3D"https://cdn.lu.m=
+a/email/logo.png" /></a></td><td width=3D"50%" align=3D"right" valign=3D"to=
+p" style=3D"width:50% !important"><div style=3D"font-size:12px;text-align:r=
+ight;color:#b3b5b7"><a href=3D"https://o.lu.ma/PP8DDkkO7K?cid=3D2p85lkj2w4n=
+g0df" style=3D"color:#b3b5b7;text-decoration:none !important">Unsubscribe</=
+a></div></td></tr></tbody></table><!--[if mso | IE]></td></tr></table><![en=
+dif]--></td></tr></tbody></table><!--[if mso | IE]></td></tr></table><![end=
+if]--><!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]--><table align=3D"center" border=3D"0" cellP=
+adding=3D"0" cellSpacing=3D"0" role=3D"presentation" style=3D"width:100% !i=
+mportant;margin:0 auto;max-width:600px"><tbody><tr><td style=3D"direction:l=
+tr;padding:0 16px;font-family:-apple-system, BlinkMacSystemFont, &#x27;Sego=
+e UI&#x27;, Roboto, Helvetica, sans-serif;font-size:16px;line-height:1.6;te=
+xt-align:left;color:#131517"><!--[if mso | IE]><table role=3D"presentation"=
+ border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tr><td align=3D"left" cl=
+ass=3D"" style=3D"" ><![endif]--><a href=3D"https://o.lu.ma/XEV696BM5s?cid=
+=3D2p85lkj2w4ng0df" style=3D"font-size:12px;color:#b3b5b7;text-decoration:n=
+one !important;padding:2px;text-align:left">Host your event with Luma =E2=
+=86=97</a><!--[if mso | IE]></td></tr></table><![endif]--></td></tr></tbody=
+></table><!--[if mso | IE]></td></tr></table><![endif]--><div style=3D"heig=
+ht:16px;line-height:16px">=E2=80=8A</div><img alt=3D"" src=3D"https://jpdm6=
+py0.r.us-west-2.awstrack.me/I0/010101933415157e-b3a2e0b4-de1d-4d54-a320-2b5=
+22bc59d8e-000000/2sMr6vSw82UNNgnJfuzP7T25Mbk=3D401" style=3D"display: none;=
+ width: 1px; height: 1px;">
+</body></html>
+----_NmP-d0d0e1c37b947ce6-Part_1--
