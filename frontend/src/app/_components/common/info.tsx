@@ -11,7 +11,7 @@ export interface InfoType {
   tokenType: string;
   timeAgo: string;
   shareText?: string;
-  description: string;
+  description: string[];
   rewardAmount: string;
   rewardSymbol: string;
 }

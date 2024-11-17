@@ -298,9 +298,9 @@ export default function PlayableMap() {
                         tokenType="meme"
                         timeAgo="h"
                         description={[
-                          "📧 Link your Gmail - it's how we know it's really you!",
-                          "🎯 Get your first 5 transactions under your belt",
-                          "🔄 Try out a token swap - it's easier than you think!",
+                          "📧 Share your Gmail to confirm your eligibility for the airdrop",
+                          "🎯 Must have a verified Coldplay concert attendance record",
+                          "🔄 Claimable when ETH reaches $3,500",
                         ]}
                         rewardAmount="1000"
                         rewardSymbol="$TKN1"
