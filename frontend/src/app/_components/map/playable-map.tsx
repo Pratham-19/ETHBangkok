@@ -42,64 +42,32 @@ export default function PlayableMap() {
 		],
 		[]
 	);
-  const tokens = useMemo<Token[]>(
-    () => [
-      {
-        id: "1",
-        latitude: 13.723399239281363,
-        longitude: 100.5596624914665,
-        symbol: "EME",
-        name: "Emerald",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "2",
-        latitude: 13.723239281363,
-        longitude: 100.55939609285565,
-        symbol: "RUB",
-        name: "Ruby",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "3",
-        latitude: 13.724370340244306,
-        longitude: 100.55871527244722,
-        symbol: "SHIB",
-        name: "Shiba",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-      {
-        id: "4",
-        latitude: 13.725185750901844,
-        longitude: 100.5596624914665,
-        symbol: "PEN",
-        name: "Pengu",
-        logoUrl: "/game-assets/token-pic.png",
-        backgroundColor: "#8A2BE2",
-      },
-    ],
-    []
-  );
 
-  const crates = useMemo<Crate[]>(
-    () => [
-      {
-        id: "1",
-        latitude: 13.726441,
-        longitude: 100.55939609285565,
-      },
-      {
-        id: "2",
-        latitude: 13.719329060891909,
-        longitude: 100.55925650453594,
-      },
-    ],
-    []
-  );
+	const tokens = useMemo<Token[]>(
+		() => [
+			{
+				id: "1",
+				latitude: 13.723239281363,
+				longitude: 100.55939609285565,
+				symbol: "SHIB",
+				name: "Shiba Inu",
+				logoUrl: "/game-assets/token-pic.png",
+				backgroundColor: "#8A2BE2",
+			},
+		],
+		[]
+	);
 
+	const crates = useMemo<Crate[]>(
+		() => [
+			{
+				id: "1",
+				latitude: 13.726441,
+				longitude: 100.55939609285565,
+			},
+		],
+		[]
+	);
 
 	// State management
 	const [currentUser, setCurrentUser] = useState<User>({
@@ -199,6 +167,25 @@ export default function PlayableMap() {
 			const data = await response.json();
 
 			if (data.success) {
+				// Get current count from localStorage or initialize it
+				const storageKey = `quest_completions_${address}`;
+				const currentCompletions = JSON.parse(
+					localStorage.getItem(storageKey) || "[]"
+				);
+
+				// Add new completion
+				currentCompletions.push({
+					timestamp: Date.now(),
+					transactionHash: data.data.transactionHash,
+				});
+
+				// Save back to localStorage
+				localStorage.setItem(
+					storageKey,
+					JSON.stringify(currentCompletions)
+				);
+
+				// Show success toast with completion count
 				toast({
 					title: "Quest Claimed Successfully! 🎉",
 					description: (
@@ -212,6 +199,9 @@ export default function PlayableMap() {
 							>
 								{data.data.transactionHash.split("/").pop()}
 							</a>
+							<p className="mt-2">
+								Total completions: {currentCompletions.length}
+							</p>
 						</div>
 					),
 					duration: 5000,
@@ -294,8 +284,8 @@ export default function PlayableMap() {
 									<RainbowBorder>
 										<div className="pb-4">
 											<Info
-												tokenImage="/tokenpic1.svg"
-												tokenName="TokenName"
+												tokenImage="/shib.png"
+												tokenName="Shiba Inu"
 												tokenType="meme"
 												timeAgo="h"
 												description={[
@@ -303,8 +293,8 @@ export default function PlayableMap() {
 													"🎯 Get your first 5 transactions under your belt",
 													"🔄 Try out a token swap - it's easier than you think!",
 												]}
-												rewardAmount="1000"
-												rewardSymbol="$TKN1"
+												rewardAmount="100"
+												rewardSymbol="$SHIB"
 												className="custom-class py-4"
 											/>
 											<div className="self-stretch rounded-lg bg-purple-600 flex flex-row items-center justify-start p-[0.75rem]">
