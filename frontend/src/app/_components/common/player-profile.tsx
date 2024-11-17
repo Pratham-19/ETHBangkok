@@ -74,7 +74,7 @@ const PlayerProfile: FunctionComponent<PlayerProfileType> = ({
               className="flex-shrink-0"
             />
             <div className="text-primary text-bold text-[1.2rem]">
-              $1,553.06
+              $0.5
             </div>
           </div>
         </div>

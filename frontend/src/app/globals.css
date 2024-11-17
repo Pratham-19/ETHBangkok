@@ -30,7 +30,7 @@
 :root,
 html,
 body {
-  @apply w-full h-full p-0 m-0;
+  @apply w-full h-full p-0 m-0 bg-purple-800;
   font-family: "Host Grotesk", sans-serif;
 }
 * {

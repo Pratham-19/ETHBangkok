@@ -249,23 +249,29 @@ export default function Crate({
 			<DialogTrigger asChild>
 				<div>
 					<RainbowBorderComponent>
-						<div className="rounded-lg bg-purple-600 flex flex-col items-center justify-center p-4 text-primary   cursor-pointer">
+						<div className="rounded-lg bg-purple-600 flex flex-col items-center justify-center p-1 text-primary   cursor-pointer">
 							<div className="w-full flex flex-row items-start justify-between">
-								<b className="text-lg">{type} Crate</b>
+								<span className="text-[0.8rem]">
+									{type} Crate
+								</span>
 								<div className="rounded bg-purple-400 flex items-center py-1 px-2 gap-1 text-highlight">
 									<Image
-										className="w-5 h-5"
+										className="size-4"
 										alt="Token Icon"
 										src="/tablericonpokerchip.svg"
 										width={20}
 										height={20}
 									/>
-									<span>x</span>
-									<span>{tokens}</span>
+									<span className="text-[1rem] font-bold">
+										x
+									</span>
+									<b className="text-[1rem] font-bold">
+										{tokens}
+									</b>
 								</div>
 							</div>
 							<Image
-								className="w-[7.5rem] h-[7.5rem] object-cover my-4"
+								className="size-[5rem] object-cover my-4"
 								loading="lazy"
 								alt={`${type} Crate`}
 								src={crateImageSrc}
@@ -275,16 +281,16 @@ export default function Crate({
 							<div className="w-full rounded flex items-center justify-between p-2 text-purple-800 bg-rainbow">
 								<div className="flex items-center gap-1">
 									<Image
-										className="size-8 brightness-0"
+										className="size-4 brightness-0"
 										loading="lazy"
 										alt="Price Tag Icon"
 										src="/tablericontagstarred1.svg"
 										width={20}
 										height={20}
 									/>
-									<span className="font-bold">{price}</span>
+									<b className="text-[1rem]">{price}</b>
 								</div>
-								<b>TKN</b>
+								<b className="text-[1rem]">TKN</b>
 							</div>
 						</div>
 					</RainbowBorderComponent>
@@ -294,9 +300,11 @@ export default function Crate({
 				<RainbowBorderComponent>
 					<div className="flex flex-col max-w-xs bg-purple-800 p-4 rounded-lg text-primary border-0">
 						<DialogHeader className="w-full flex flex-row items-center justify-between">
-							<span className="text-[1.7rem] font-bold">
-								{type} Crate
-							</span>
+							<DialogTitle>
+								<span className="text-[1.3rem] font-bold">
+									{type} Crate
+								</span>
+							</DialogTitle>
 							<div className="rounded bg-purple-400 flex items-center py-1 px-2 gap-1 text-highlight">
 								<Image
 									className="w-5 h-5"
@@ -330,18 +338,20 @@ export default function Crate({
 										<p>Price:</p>
 										<div className="mt-2 rounded flex items-center gap-x-2 p-2 text-purple-800 bg-rainbow self-stretch">
 											<Image
-												className="w-5 h-5"
+												className="size-6"
 												loading="lazy"
 												alt="Price Tag Icon"
 												src="/logo-dark.svg"
 												width={20}
 												height={20}
 											/>
-											<div className="flex items-center text-3xl">
-												<span className="font-bold">
+											<div className="flex items-center ">
+												<span className="text-[1.3rem]">
 													{price}
 												</span>
-												<b className="ml-1">TKN</b>
+												<b className="ml-1 text-[1.3rem]">
+													TKN
+												</b>
 											</div>
 										</div>
 									</div>
@@ -369,32 +379,38 @@ export default function Crate({
 								</div>
 							</div>
 						)}
-						<DialogFooter className="flex flex-row w-full items-center justify-evenly mt-4">
+						<div className="flex flex-row w-full items-center justify-evenly ">
 							<Button
 								variant="outline"
-								className="bg-purple-800 hover:bg-transparent hover:text-primary ring-0 border-0 ring-offset-0 placeholder:ring-offset-0"
+								className="bg-purple-800 hover:bg-transparent hover:text-primary ring-0 border-0 ring-offset-0 placeholder:ring-offset-0 focus-visible:ring-0"
 								onClick={handleBackClick}
 							>
 								Back
 							</Button>
 							{/* <div
-								className="bg-primary text-highlight rounded-full"
-								// disabled={isOpened}
-							> */}
+												className="bg-primary text-highlight rounded-full"
+												// disabled={isOpened}
+											> */}
 							{/* <Image
-                  className="w-5 h-5"
-                  loading="lazy"
-                  alt="Price Tag Icon"
-                  src="/tablericontagstarred1.svg"
-                  width={20}
-                  height={20}
-                />{" "}
-                Purchase Crate */}
-							<Checkout productId="ac68115c-83ff-4584-8554-0b07dafbf0a8">
-								<CheckoutButton coinbaseBranded />
+								className="w-5 h-5"
+								loading="lazy"
+								alt="Price Tag Icon"
+								src="/tablericontagstarred1.svg"
+								width={20}
+								height={20}
+								/>{" "}
+								Purchase Crate */}
+							<Checkout
+								productId="ac68115c-83ff-4584-8554-0b07dafbf0a8"
+								className="!my-2 !p-0 bg-[#3773f5] rounded-full text-white"
+							>
+								<CheckoutButton
+									coinbaseBranded
+									className="!my-0 !p-2 !gap-x-2"
+								/>
 							</Checkout>
 							{/* </div> */}
-						</DialogFooter>
+						</div>
 					</div>
 				</RainbowBorderComponent>
 			</DialogContent>

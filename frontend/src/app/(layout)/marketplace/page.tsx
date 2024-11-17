@@ -1,3 +1,4 @@
+"use client";
 import { FunctionComponent, useCallback } from "react";
 import Crate from "../../_components/common/crate";
 
@@ -13,8 +14,10 @@ const page: FunctionComponent = () => {
             Collect random tokens purchasing a mystic crate. You can find from
             one to three different tokens inside the crate
           </div>
-          <div className="self-stretch grid grid-cols-1 md:grid-cols-2 gap-[0.5rem]">
+          <div className="self-stretch grid grid-cols-2 gap-[0.5rem]">
             <Crate price="100" tokens="1" type="Small" />
+            <Crate price="100" tokens="1" type="Medium" />
+            <Crate price="100" tokens="1" type="Large" />
           </div>
         </div>
       </section>
